@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'samuel/src',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.6.3',
+            'version' => '6.6.3.0',
+            'reference' => '9400f305a898f194caff5521f64e5dfa926626f3',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'rospdf/pdf-php' => array(
+            'pretty_version' => '0.12.63',
+            'version' => '0.12.63.0',
+            'reference' => 'f957e49ddfa6b7891de62c48b1de965a74db6c44',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rospdf/pdf-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'samuel/src' => array(
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title></title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body style="background-color:#BEC8E3;">
+
+
+
+
+	<div class="container col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown link
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+          </li>
+      </ul>
+  </div>
+</nav></div>		
+
+
+
+
+<div class="container">
+    <br>
+    <form role="form">
+        <label> autor 1</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-8">
+
+                <label for="exampleInput">
+                    nome*
+                </label>
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    sobrenome*
+                </label>
+                <input type="text" placeholder="Ex: Silva"class="form-control" id="exampleInputPassword1" />
+            </div>
+
+        </div>
+        <br>
+        <label> autor 2</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-8">
+
+                <label for="exampleInput">
+                    nome
+                </label>
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    sobrenome
+                </label>
+                <input type="text" placeholder="Ex: Silva" class="form-control" id="exampleInputPassword1" />
+            </div>
+
+        </div>
+        <br>
+        <label> autor 3</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-8">
+
+                <label for="exampleInput">
+                    nome
+                </label>
+                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    sobrenome
+                </label>
+                <input type="text" placeholder="Ex: Silva" class="form-control" id="exampleInputPassword1" />
+            </div>
+
+        </div>
+        <br>
+        <div class="row" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    Titulo do trabalho*
+                </label>
+                <input type="text" placeholder="Ex: Loucuras discretas" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    Subtitulo do trabalho
+                </label>
+                <input type="text" placeholder="Ex: seminário sobre as psicoses ordinárias" class="form-control" id="exampleInputPassword1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    Tipo do trabalho*
+                </label>
+                <select class="custom-select">
+                    <option value="1">Tese</option>
+                    <option value="2">Dissertação</option>
+                    <option value="3">TCC(Especialização)</option>
+                    <option value="3" selected>TCC(Graduação)</option>
+                    <option value="3">TCC(Stricto Sensu)</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="row" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    Ano*
+                </label>
+                <input type="text" placeholder="Ex: 2022" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    Código Cutter* <a href="http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/cutter">ver tabela</a>
+                </label>
+                <input type="text" placeholder="Ex: 111" class="form-control" id="exampleInputPassword1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    Curso*
+                </label>
+                <select class="custom-select">
+                    <option selected>Escolha o curso</option>
+                    <option value="2">Engenharia Cívil</option>
+                    <option value="3">Licenciatura em Química</option>
+                    <option value="3">Análise e Desenvolvimento de Sistemas</option>
+                </select>
+            </div>
+
+        </div>
+        <br><br>
+        <label> Orientador</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-8">
+
+                <label for="exampleInput">
+                    nome*
+                </label>
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    sobrenome*
+                </label>
+                <input type="text" placeholder="Ex: Silva"class="form-control" id="exampleInputPassword1" />
+            </div>
+
+        </div>
+        <br><br>
+        <label> Coorientador 1</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-8">
+
+                <label for="exampleInput">
+                    nome
+                </label>
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    sobrenome
+                </label>
+                <input type="text" placeholder="Ex: Silva" class="form-control" id="exampleInputPassword1" />
+            </div>
+
+        </div>
+        <br><br>
+        <label> Coorientador 2</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-8">
+
+                <label for="exampleInput">
+                    nome
+                </label>
+                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="exampleInput">
+                    sobrenome
+                </label>
+                <input type="text" placeholder="Ex: Silva" class="form-control" id="exampleInputPassword1" />
+            </div>
+
+        </div>
+        <br> 
+<label>Notas</label>
+<br>
+<div class="form-group col-md-12 form-check-inline">
+    
+    <div class="form-group col-md-4 form-check-inline">
+
+        <div>
+            <div class="form-check">
+
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">Siglas</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">Mapas</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Fotografias</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Abreviaturas</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Símbolos</label>
+        </div>
+    </div>
+        <div>
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Gráfico</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Tabelas</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Algoritmos</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Lista de Figuras</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">Lista de Tabelas</label>
+        </div>
+        </div>
+        
+        
+        
+
+    </div>
+    <div class="form-group col-md-4" align="right">
+        <div class="form-check">
+            <label class="form-check-label" for="exampleRadios1">Ilustrações: </label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Sim</label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Não</label>
+            
+    </div>
+    <div class="form-check">
+            <label class="form-check-label" for="exampleRadios1">Bibliografia: </label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Sim</label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Não</label>
+            
+    </div>
+    <div class="form-check">
+            <label class="form-check-label" for="exampleRadios1">Anexos: </label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Sim</label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Não</label>
+            
+    </div>
+    <div class="form-check">
+            <label class="form-check-label" for="exampleRadios1">Apêndice: </label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Sim</label>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Não</label>
+            
+    </div>
+     </div> 
+    <div class="form-group col-md-4"> 
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Nº de folhas em romano</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ex: XVI">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Nº de folhas em arábico</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Ex: 123">
+        </div>
+
+    </div> 
+
+</div>
+        
+</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>		
