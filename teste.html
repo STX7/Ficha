@@ -6,49 +6,40 @@
    <title></title>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body style="background-color:#BEC8E3;">
+<body style="background-color:#BEC8E3;">		
 
 
 
+<div class="container">
 
-	<div class="container col-md-12">
+    <!-- Menu  --------------------------------- -->
+
+    <div class="container" >
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">Menu</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Pedidos<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Histórico</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">Informações</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown link
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-          </li>
+            
       </ul>
   </div>
-</nav></div>		
+</nav></div>
 
-
-
-
-<div class="container">
+<!-- Formulário  --------------------------------- -->
     <br>
     <form role="form">
-        <label> autor 1</label>
+        <label style="font-weight: bold;"> autor 1</label>
         <div class="row border border-dark" style="background-color:#ECF4FE;">
             <div class="form-group col-md-8">
 
@@ -67,7 +58,7 @@
 
         </div>
         <br>
-        <label> autor 2</label>
+        <label style="font-weight: bold;"> autor 2</label>
         <div class="row border border-dark" style="background-color:#ECF4FE;">
             <div class="form-group col-md-8">
 
@@ -86,7 +77,7 @@
 
         </div>
         <br>
-        <label> autor 3</label>
+        <label style="font-weight: bold;"> autor 3</label>
         <div class="row border border-dark" style="background-color:#ECF4FE;">
             <div class="form-group col-md-8">
 
@@ -105,7 +96,7 @@
 
         </div>
         <br>
-        <div class="row" style="background-color:#ECF4FE;">
+        <div class="row border border-dark border-bottom-0" style="background-color:#ECF4FE;">
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
@@ -135,7 +126,7 @@
             </div>
 
         </div>
-        <div class="row" style="background-color:#ECF4FE;">
+        <div class="row border border-dark border-top-0" style="background-color:#ECF4FE;">
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
@@ -157,17 +148,17 @@
                 </label>
                 <select class="custom-select">
                     <option selected>Escolha o curso</option>
-                    <option value="2">Engenharia Cívil</option>
-                    <option value="3">Licenciatura em Química</option>
+                    <option value="1">Engenharia Cívil</option>
+                    <option value="2">Licenciatura em Química</option>
                     <option value="3">Análise e Desenvolvimento de Sistemas</option>
                 </select>
             </div>
 
         </div>
         <br><br>
-        <label> Orientador</label>
+        <label style="font-weight: bold;"> Orientador</label>
         <div class="row border border-dark" style="background-color:#ECF4FE;">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     nome*
@@ -181,12 +172,24 @@
                 </label>
                 <input type="text" placeholder="Ex: Silva"class="form-control" id="exampleInputPassword1" />
             </div>
+            <div class="form-group col-md-4" align="left" style="left: 20px;">
+                <br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">Doutor
+                </label>
+                <br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+
+                <label class="form-check-label" for="defaultCheck1">
+                    Orientadora
+                </label>
+            </div>
 
         </div>
         <br><br>
-        <label> Coorientador 1</label>
+        <label style="font-weight: bold;"> Coorientador 1</label>
         <div class="row border border-dark" style="background-color:#ECF4FE;">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     nome
@@ -200,12 +203,23 @@
                 </label>
                 <input type="text" placeholder="Ex: Silva" class="form-control" id="exampleInputPassword1" />
             </div>
+            <div class="form-group col-md-4"  align="left" style="left: 20px;">
+                <br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Doutor
+                </label><br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
 
+                <label class="form-check-label" for="defaultCheck1">
+                    Orientadora
+                </label>
+            </div>
         </div>
         <br><br>
-        <label> Coorientador 2</label>
+        <label style="font-weight: bold;"> Coorientador 2</label>
         <div class="row border border-dark" style="background-color:#ECF4FE;">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     nome
@@ -219,16 +233,26 @@
                 </label>
                 <input type="text" placeholder="Ex: Silva" class="form-control" id="exampleInputPassword1" />
             </div>
+            <div class="form-group col-md-4" align="left" style="left: 20px;">
+                <br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Doutor
+                </label><br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
 
+                <label class="form-check-label" for="defaultCheck1">
+                    Orientadora
+                </label>
+            </div>
         </div>
         <br> 
-<label>Notas</label>
+<label style="font-weight: bold;">Notas</label>
 <br>
-<div class="form-group col-md-12 form-check-inline">
+<div class="row form-group border border-dark " style="background-color:#ECF4FE;">
     
-    <div class="form-group col-md-4 form-check-inline">
-
-        <div>
+    <div class="form-group col-md-4">
+        <br>
             <div class="form-check">
 
               <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
@@ -250,8 +274,9 @@
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Símbolos</label>
         </div>
-    </div>
+
         <div>
+            <div>
             <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Gráfico</label>
@@ -273,47 +298,57 @@
             <label class="form-check-label" for="defaultCheck1">Lista de Tabelas</label>
         </div>
         </div>
-        
-        
-        
+        </div>
 
     </div>
-    <div class="form-group col-md-4" align="right">
-        <div class="form-check">
-            <label class="form-check-label" for="exampleRadios1">Ilustrações: </label>
+    <div class="form-group col-md-4" align="left">
+        <br>
+        <label class="form-check-label" for="exampleRadios1">Ilustrações: </label><br>
+        <div class="form-check form-check-inline">
+            
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Sim</label>
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
-    <div class="form-check">
-            <label class="form-check-label" for="exampleRadios1">Bibliografia: </label>
+    <br><br>
+    <label class="form-check-label" for="exampleRadios1">Bibliografia: </label><br>
+    <div class="form-check form-check-inline">
+            
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Sim</label>
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
-    <div class="form-check">
-            <label class="form-check-label" for="exampleRadios1">Anexos: </label>
+        <br><br>
+        <label class="form-check-label" for="exampleRadios1">Anexos: </label> <br>  
+        <div class="form-check form-check-inline">
+            
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Sim</label>
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
-    <div class="form-check">
-            <label class="form-check-label" for="exampleRadios1">Apêndice: </label>
+     <br><br>
+     <label class="form-check-label" for="exampleRadios1">Apêndice: </label><br>
+    <div class="form-check form-check-inline">
+            
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Sim</label>
             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
-     </div> 
-    <div class="form-group col-md-4"> 
-        <div class="form-group">
+
+    
+     </div>
+
+    <div class="form-group col-md-4">
+        <br><br>
+    <div class="form-group">
             <label for="formGroupExampleInput2">Nº de folhas em romano</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ex: XVI">
         </div>
@@ -321,11 +356,41 @@
             <label for="formGroupExampleInput">Nº de folhas em arábico</label>
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Ex: 123">
         </div>
+    </div>
+        
 
-    </div> 
 
 </div>
-        
+ 
+   <br>
+   <label style="font-weight: bold;"> Assunto/Palavra-chave</label>
+        <div class="row border border-dark" style="background-color:#ECF4FE;">
+            <div class="form-group col-md-12">
+                <label for="exampleInput">
+                     (min. 1, max. 5)
+                </label>
+                <input type="text" placeholder="Ex: Programação procedural" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-12">
+                <input type="text" placeholder="Ex: Engenharia de alimentos" class="form-control" id="exampleInputEmail1" />
+            </div>
+            <div class="form-group col-md-12">
+                <input type="text" placeholder="Ex: Química industrial" class="form-control" id="exampleInputEmail1" />
+            </div>
+            
+            <div class="form-group col-md-12">
+                <input type="text" placeholder="Ex: Desenvolvimento regional" class="form-control" id="exampleInputEmail1" />
+            </div>
+
+            <div class="form-group col-md-12">
+                <input type="text" placeholder="Ex: Adaptação social" class="form-control" id="exampleInputEmail1" />
+            </div>
+
+        </div>
+        <br>
+
+    <input class="btn btn-success btn-lg" type="submit" value="Enviar" placeholder="Enviar">
+    <input class="btn btn-secondary btn-lg" type="reset" value="Resetar" placeholder="Resetar">   <br><br>  
 </form>
 </div>
 
