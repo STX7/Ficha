@@ -64,6 +64,7 @@ if (!isset($_POST["nome_autor1"])) {
 
         <!-- Bootstrap core CSS -->
         <link href="bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -258,6 +259,7 @@ if (!isset($_POST["nome_autor1"])) {
                 </form>
             </div>
         </div>
+        
     </body>
 </html>
 <?php
@@ -269,21 +271,22 @@ if (!isset($_POST["nome_autor1"])) {
 
     require('pdf-php/src/Cezpdf.php');
 
-    $nome_autor1 = filter_input(INPUT_POST, 'nome_autor1', FILTER_SANITIZE_STRING);
-    $sobrenome_autor1 = filter_input(INPUT_POST, 'sobrenome_autor1', FILTER_SANITIZE_STRING);
-    $nome_autor2 = filter_input(INPUT_POST, 'nome_autor2', FILTER_SANITIZE_STRING);
-    $sobrenome_autor2 = filter_input(INPUT_POST, 'sobrenome_autor2', FILTER_SANITIZE_STRING);
-    $nome_autor3 = filter_input(INPUT_POST, 'nome_autor3', FILTER_SANITIZE_STRING);
-    $sobrenome_autor3 = filter_input(INPUT_POST, 'sobrenome_autor3', FILTER_SANITIZE_STRING);
+    $nome_autor1 = filter_input(INPUT_POST, 'nome_autor1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_autor1 = filter_input(INPUT_POST, 'sobrenome_autor1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $nome_autor2 = filter_input(INPUT_POST, 'nome_autor2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_autor2 = filter_input(INPUT_POST, 'sobrenome_autor2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $nome_autor3 = filter_input(INPUT_POST, 'nome_autor3', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_autor3 = filter_input(INPUT_POST, 'sobrenome_autor3', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
+    $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
     $subtitulo = ($_POST["subtitulo"]);
     if (!empty($subtitulo)) {
         $titulo .= ": $subtitulo";
     }
-    $cutter = $_POST["cutter"];
+    $cutter = filter_input(INPUT_POST, 'cutter', FILTER_SANITIZE_SPECIAL_CHARS);
+    
 
-    $doutor = ($_POST["Doutorado"]);
+
     $trabalho = ($_POST["trabalho"]);  // tese / dissertação
     $programa = ($_POST["programa"]);  // cursos ...
     $nome_ori = ($_POST["nome_ori"]); // nome do orientador
@@ -294,28 +297,28 @@ if (!isset($_POST["nome_autor1"])) {
     //if (!empty($_POST["orientadora"]))
     //   $orientadora = $_POST["orientadora"]; // se sexo feminino, vale "a"
 
-    $nome_coori1 = ($_POST["nome_coori1"]); // nome do coorientador
-    $sobrenome_coori1 = ($_POST["sobrenome_coori1"]); // sobrenome do coorientador
+    $nome_coori1 = filter_input(INPUT_POST, 'nome_coori1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_coori1 = filter_input(INPUT_POST, 'sobrenome_coori1', FILTER_SANITIZE_SPECIAL_CHARS);
     if (!empty($_POST["coorientadora1"]))
         $coorientadora1 = $_POST["coorientadora1"]; // se sexo feminino, vale "a"
     else
         $coorientadora1 = " ";
     
-    $nome_coori2 = ($_POST["nome_coori2"]); // nome do coorientador
-    $sobrenome_coori2 = ($_POST["sobrenome_coori2"]); // sobrenome do coorientador
+    $nome_coori2 = filter_input(INPUT_POST, 'nome_coori2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_coori2 = filter_input(INPUT_POST, 'sobrenome_coori2', FILTER_SANITIZE_SPECIAL_CHARS);
     if (!empty($_POST["coorientadora2"]))
         $coorientadora2 = $_POST["coorientadora2"]; // se sexo feminino, vale "a"	
     else
         $coorientadora2 = " ";
-    $ano = $_POST["ano"];
-    $pags = $_POST["pags"];
-    $pags_roma = $_POST["pags_roma"];
+    $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
+    $pags = filter_input(INPUT_POST, 'pags', FILTER_SANITIZE_NUMBER_INT);
+    $pags_roma = filter_input(INPUT_POST, 'pags_roma', FILTER_SANITIZE_SPECIAL_CHARS);
     
-    $assunto1 = ($_POST["assunto1"]);
-    $assunto2 = ($_POST["assunto2"]);
-    $assunto3 = ($_POST["assunto3"]);
-    $assunto4 = ($_POST["assunto4"]);
-    $assunto5 = ($_POST["assunto5"]);
+    $assunto1 = filter_input(INPUT_POST, 'assunto1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto2 = filter_input(INPUT_POST, 'assunto2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto3 = filter_input(INPUT_POST, 'assunto3', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto4 = filter_input(INPUT_POST, 'assunto4', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto5 = filter_input(INPUT_POST, 'assunto5', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $codigo1 = substr($sobrenome_autor1, 0, 1);
 
@@ -343,9 +346,12 @@ if (!isset($_POST["nome_autor1"])) {
             $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
     else
     $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . ", "  . $nome_autor3 . " " . $sobrenome_autor3 .  "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
-    if (!empty($nome_coori1)) //caso tenha coorientador
+    if (!empty($nome_coori2)) //caso tenha coorientador
+        if (!empty($nome_coori)) {
+            $texto .= "; coorientador$coorientadora1 " . $nome_coori1 . " " . $sobrenome_coori2;
+        }
         $texto .= "; coorientador$coorientadora1 " . $nome_coori1 . " " . $sobrenome_coori2;
-
+/* perguntar para a bibliotecária a ordem dos coorientadores e arrumar o if de gênero do coorientador*/
     
     if (!empty($pags_roma)) //numeros romanos
         $texto .= (". -- Uruaçu, " . $ano . ".\n   $pags p.\n   $pags_roma p.\n\n   ");
@@ -353,7 +359,12 @@ if (!isset($_POST["nome_autor1"])) {
         $texto .= (". -- Uruaçu, " . $ano . ".\n   $pags p.\n\n   ");  
     
 
-    $texto .= ("    Orientador: Prof. ". $orientadora . " " . $sobrenome_ori . "\n" );
+    if (!empty($_POST["doutorado"]))
+        $texto .= ("    Orientador: Prof. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+    else
+        $texto .= ("    Orientador: Prof. Dr. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+
+
 
     //aplica código CDD
     if($programa == "em Licenciatura em Química")
@@ -460,8 +471,9 @@ if (!isset($_POST["nome_autor1"])) {
         $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. $sobrenome_coori1, $nome_coori1, coorient. III. $sobrenome_coori2, $nome_coori2, coorient. IV. ";
     $texto .= ("Título. ");}
 
-
+    
     $pdf = new Cezpdf();
+
 
     $ficha = array(array('cod' => "\n" . $codigo, 'ficha' => $texto));
 
@@ -475,5 +487,8 @@ if (!isset($_POST["nome_autor1"])) {
     $pdf->ezTable($ficha, '', '', array('fontSize' => 9, 'showHeadings' => 0, 'showLines' => 0, 'width' => 340, 'cols' => array('cod' => array('width' => 45))));
     $pdf->ezText("\n$xyz", 9, array('left' => 375));
 
+
+
     $pdf->ezStream();
+    
 }
