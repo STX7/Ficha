@@ -195,11 +195,12 @@ if (!isset($_POST["nome_autor1"])) {
                         <input type="checkbox" name="orientadora" value="a"> orientadora<br />
 
                         <label>Nome do 1º coorientador:</label> <input type="text" name="nome_coori1" size="50"><br />
-                        <label>Sobrenome do 1º coorientador:</label> <input type="text" name="sobrenome_coori1" size="50"> <input type="checkbox" name="doutorado" value="Dr."> doutor 
+                        <label>Sobrenome do 1º coorientador:</label> <input type="text" name="sobrenome_coori1" size="50"> <input type="checkbox" name="doutorado1" value="Dr."> doutor 
                         <input type="checkbox" name="coorientadora1" value="a"> coorientadora<br /><br />
 
                         <label>Nome do 2º coorientador:</label> <input type="text" name="nome_coori2" size="50"><br />
-                        <label>Sobrenome do 2º coorientador:</label> <input type="text" name="sobrenome_coori2" size="50"> 
+                        <label>Sobrenome do 2º coorientador:</label> <input type="text" name="sobrenome_coori2" size="50">
+                        <input type="checkbox" name="doutorado2" value="Dr."> doutor
                         <input type="checkbox" name="coorientadora2" value="a"> coorientadora<br /><br />
 
                         <label>Ano*:</label>  <input type="text" name="ano" size="6"><br />
@@ -279,7 +280,7 @@ if (!isset($_POST["nome_autor1"])) {
     $sobrenome_autor3 = filter_input(INPUT_POST, 'sobrenome_autor3', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
-    $subtitulo = ($_POST["subtitulo"]);
+    $subtitulo = filter_input(INPUT_POST, 'subtitulo', FILTER_SANITIZE_SPECIAL_CHARS);
     if (!empty($subtitulo)) {
         $titulo .= ": $subtitulo";
     }
@@ -289,27 +290,21 @@ if (!isset($_POST["nome_autor1"])) {
 
     $trabalho = ($_POST["trabalho"]);  // tese / dissertação
     $programa = ($_POST["programa"]);  // cursos ...
-    $nome_ori = ($_POST["nome_ori"]); // nome do orientador
-    $sobrenome_ori = ($_POST["sobrenome_ori"]); // sobrenome do orientador
+    $nome_ori = filter_input(INPUT_POST, 'nome_ori', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_ori = filter_input(INPUT_POST, 'sobrenome_ori', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $orientadora = isset($_POST["orientadora"]) ? "orientadora" : "orientador";
-    
-    //if (!empty($_POST["orientadora"]))
-    //   $orientadora = $_POST["orientadora"]; // se sexo feminino, vale "a"
+    $orientadora = isset($_POST["orientadora"]) ? "Orientadora" : "Orientador";
 
     $nome_coori1 = filter_input(INPUT_POST, 'nome_coori1', FILTER_SANITIZE_SPECIAL_CHARS);
     $sobrenome_coori1 = filter_input(INPUT_POST, 'sobrenome_coori1', FILTER_SANITIZE_SPECIAL_CHARS);
-    if (!empty($_POST["coorientadora1"]))
-        $coorientadora1 = $_POST["coorientadora1"]; // se sexo feminino, vale "a"
-    else
-        $coorientadora1 = " ";
+    $doutorado1 = ($_POST["doutorado1"]);
+    $coorientadora1 = isset($_POST["coorientadora1"]) ? "Coorientadora" : "Coorientador";
     
     $nome_coori2 = filter_input(INPUT_POST, 'nome_coori2', FILTER_SANITIZE_SPECIAL_CHARS);
     $sobrenome_coori2 = filter_input(INPUT_POST, 'sobrenome_coori2', FILTER_SANITIZE_SPECIAL_CHARS);
-    if (!empty($_POST["coorientadora2"]))
-        $coorientadora2 = $_POST["coorientadora2"]; // se sexo feminino, vale "a"	
-    else
-        $coorientadora2 = " ";
+    $doutorado2 = ($_POST["doutorado2"]);
+    $coorientadora2 = isset($_POST["coorientadora2"]) ? "Coorientadora" : "Coorientador";
+
     $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
     $pags = filter_input(INPUT_POST, 'pags', FILTER_SANITIZE_NUMBER_INT);
     $pags_roma = filter_input(INPUT_POST, 'pags_roma', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -346,12 +341,7 @@ if (!isset($_POST["nome_autor1"])) {
             $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
     else
     $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . ", "  . $nome_autor3 . " " . $sobrenome_autor3 .  "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
-    if (!empty($nome_coori2)) //caso tenha coorientador
-        if (!empty($nome_coori)) {
-            $texto .= "; coorientador$coorientadora1 " . $nome_coori1 . " " . $sobrenome_coori2;
-        }
-        $texto .= "; coorientador$coorientadora1 " . $nome_coori1 . " " . $sobrenome_coori2;
-/* perguntar para a bibliotecária a ordem dos coorientadores e arrumar o if de gênero do coorientador*/
+    
     
     if (!empty($pags_roma)) //numeros romanos
         $texto .= (". -- Uruaçu, " . $ano . ".\n   $pags p.\n   $pags_roma p.\n\n   ");
@@ -359,10 +349,31 @@ if (!isset($_POST["nome_autor1"])) {
         $texto .= (". -- Uruaçu, " . $ano . ".\n   $pags p.\n\n   ");  
     
 
-    if (!empty($_POST["doutorado"]))
-        $texto .= ("    Orientador: Prof. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+    if (empty($_POST["doutorado"]))//caso orientador tenha doutorado
+        $texto .= ("  $orientadora: Prof. ". $nome_ori . " " . $sobrenome_ori . "\n" );
     else
-        $texto .= ("    Orientador: Prof. Dr. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+        $texto .= ("  $orientadora: Prof. Dr. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+
+
+    if (!empty($nome_coori1)){ //caso tenha coorientador 1
+        if (!empty($nome_coori2)) { //caso tenha coorientador 2
+
+            if (!empty($doutorado2)) { // caso coorientador 2 tenha doutorado
+                $texto .= "     $coorientadora2: Prof. Dr. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n"; 
+            }else{
+                $texto .= "     $coorientadora2: Prof. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n";
+            }
+            
+            
+        }
+        if (!empty($doutorado1)) {//caso coorientador 1 tenha doutorado
+                $texto .= "     $coorientadora1: Prof. Dr. " . $nome_coori1 . " " . $sobrenome_coori1 . "\n"; 
+            }else{
+                $texto .= "     $coorientadora1: Prof" . $nome_coori1 . " " . $sobrenome_coori1 . "\n";
+            }
+        
+
+        }
 
 
 
@@ -409,8 +420,7 @@ if (!isset($_POST["nome_autor1"])) {
     if (isset($notas2)) {
       $texto .= "   ". implode(". ", $notas2). ".\n";
     }
-
-
+   
 
 
     if (!empty($_POST["siglas"]))
@@ -461,7 +471,7 @@ if (!isset($_POST["nome_autor1"])) {
     if (!empty($assunto5))
         $texto .= "5. $assunto5. ";
 
-    if  (empty($nome_coori2)){
+    if  (empty($nome_coori2)){ //caso tenha coorientador2
         if (empty($nome_coori1)){
             $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. ";}
         else{

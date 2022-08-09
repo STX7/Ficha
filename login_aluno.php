@@ -26,7 +26,7 @@
 				
 					setcookie("nome", $user, time() + (86400 * 30));
 					$_SESSION['user'] = $usuario->ID;
-					header("Location:ficha_usuario.php");
+					header("Location:ficha_aluno.php");
 				
 			}else{
 
