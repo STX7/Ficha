@@ -1,5 +1,5 @@
 <?php 
-	//session_start();
+	session_start();
 	require("conexao.php");
 	$user = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
 	$senha = isset($_POST['senha']);
@@ -24,7 +24,7 @@
 			if (password_verify($senha, $usuario->senha)) {
 				
 					setcookie("nome", $user, time() + (86400 * 30));
-					$_SESSION['user'] = $user;
+					$_SESSION['user'] = $usuario->ID;
 					header("Location:menu.php");
 				
 			}else{

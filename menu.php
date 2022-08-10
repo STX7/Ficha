@@ -37,6 +37,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="ficha_usuario.php">Enviar nova ficha</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php">Sair</a>
+            </li>
             
       </ul>
   </div>
@@ -67,7 +70,7 @@
     else{
         
     foreach ($itens as $item) {
-        
+
         echo "<tr>
       <th scope='row'></th>
       <td>$item->n_autor1</td>
