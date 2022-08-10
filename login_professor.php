@@ -1,11 +1,13 @@
 <?php 
 	session_start();
 	require("conexao.php");
-	$user = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-	$senha = isset($_POST['senha']);
+	
 
 	if (isset($_POST['login'])) {
 
+	$user = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+	$senha = isset($_POST['senha']);
+	
 	if (!$user || !$senha) {
 
 		echo "digite sua senha e login";
@@ -56,7 +58,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" rel="stylesheet">
 
   </head>
-  <body>
+  <body style="background-color:#BEC8E3;">
 
     <div class="container-fluid">
 	<div class="row">
