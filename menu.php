@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	require("conexao.php");
+	$id = $_SESSION['user'];
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +16,10 @@
 
 
 
-<div class="container">
+<div class="container" class="col-12">
 
     <!-- Menu  --------------------------------- -->
 
-    <div class="container" >
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a class="navbar-brand" href="#">Menu</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,28 +41,53 @@
       </ul>
   </div>
 </nav>
+
+
+<div style="background-color:#ffffff">
+
+  	<?php
+
+	$lista = $conexao->prepare("select * from ficha where id_usuario = '$id'");
+	$lista->execute();
+	$itens = $lista->fetchAll(PDO::FETCH_OBJ);
+    echo "<table class='table'>
+  <thead >
+    <tr>
+      <th scope='col'> </th>
+      <th scope='col'>Nome</th>
+      <th scope='col'>Titulo</th>
+      <th scope='col'> </th>
+      <th scope='col'> </th>
+    </tr>
+  </thead>
+  <tbody>";
+    if (empty($itens)) {
+       echo "<tr><th scope='row'></th><th scope='row'>Você não possui fichas cadastradas</th></tr>";
+    }
+    else{
+        
+    foreach ($itens as $item) {
+        
+        echo "<tr>
+      <th scope='row'></th>
+      <td>$item->n_autor1</td>
+      <td>$item->titulo</td>
+      <td><a href='editar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
+      <td><a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='50' width='50'></a></td>
+    </tr>";
+
+
+    }
+
+    }
+    echo "</tbody></table>";
+	
+?>
+  
+
+
+
 </div>
-<div>
-<label style="font-weight: bold;font-size: 25px;"> Pedidos de ficha:</label>
-    <div class="row border border-dark col-md-12" style="background-color:#ECF4FE;"> 
-        <div class="list-group col-md-12">
-            <a href="#" class="list-group-item list-group-item-action list-group-item-success">Um simples item success do grupo de lista</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Um simples item danger do grupo de lista</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Um simples item warning do grupo de lista</a>
-        </div>
-    </div>
-
-
-
-
-
-
-</div>
-
-
-
-   
-
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

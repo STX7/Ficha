@@ -697,6 +697,6 @@ if (!isset($_POST["Enviar"])) {
     $pdf->ezText("\n$xyz", 9, array('left' => 375));
 
 
-    $pdf->ezStream(array('Content-Disposition'=>'ficha','download' => 0));
+    $pdf->ezStream(array('Content-Disposition'=>'ficha.pdf','download' => 1));
     
 }

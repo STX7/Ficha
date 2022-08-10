@@ -488,6 +488,8 @@ if (!isset($_POST["nome_autor1"])) {
     $orientadora = isset($_POST["orientadora"]) ? "orientadora" : "orientador";
     $coorientadora1 = isset($_POST["coorientadora1"]) ? "coorientadora" : "coorientador";
     $coorientadora1 = isset($_POST["coorientadora2"]) ? "coorientadora" : "coorientador";
+
+    
     //if (!empty($_POST["orientadora"]))
     //   $orientadora = $_POST["orientadora"]; // se sexo feminino, vale "a"
     
