@@ -1,6 +1,55 @@
 <?php
 require("conexao.php");
 session_start();
+$id_aluno = $_SESSION['user'];
+    $id = $_GET['id'];
+    $lista2 = $conexao->prepare("delete from ficha where ficha.id = '$id'");
+    $lista2->execute();
+    $itens = $lista2->fetchAll(PDO::FETCH_OBJ);
+
+    $nome_autor1 = $itens->n_autor1;
+    $sobrenome_autor1 = $itens->s_autor1;
+    $nome_autor2 =  $itens->n_autor2;
+    $sobrenome_autor2 = $itens->s_autor2;
+    $nome_autor3 = $itens->n_autor3;
+    $sobrenome_autor3 = $itens->s_autor3;
+    $titulo = $itens->titulo;
+    $subtitulo = $itens->sub_titulo;
+    $cutter = $itens->codigo;
+    $trabalho = $itens->trabalho;
+    $programa = $itens->curso;
+    $nome_ori = $itens->n_orientador;
+    $sobrenome_ori = $itens->s_orientador;
+    $nome_coori1 = $itens->n_coorientado1;
+    $sobrenome_coori1 = $itens->s_coorientador1;
+    $nome_coori2 = $itens->n_coorientador2;
+    $sobrenome_coori2 = $itens->s_coorientador2;
+    //$orientadora = $itens->;
+    //$coorientadora1 = $itens->
+    //$coorientadora1 = $itens->
+    $ano = $itens->ano;
+    $pags = $itens->n_pags;
+    $pags_roma = $itens->n_pags_rom;
+    $assunto1 = $itens->assunto1;
+    $assunto2 = $itens->assunto2;
+    $assunto3 = $itens->assunto3;
+    $assunto4 = $itens->assunto4;
+    $assunto5 = $itens->assunto5;
+    $sigla = $itens->siglas;
+    $mapa = $itens->mapas;
+    $fotografias = $itens->fotografias;
+    $abreviaturas = $itens->abreviaturas;
+    $simbolos = $itens->simbolos;
+    $graficos = !$itens->graficos;
+    $tabelas = $itens->tabelas;
+    $algoritmos = $itens->algoritmos;
+    $figuras = $itens->lista_figuras;
+    $lista_tabela = $itens->lista_tabelas;
+    $ilustracao = $itens->ilustracoes;
+    $bibliografia = $itens->bibliografia;
+    $anexo = $itens->anexos;
+    $apendice = $itens->apendice;
+
 /**
 /**
  * 
@@ -104,14 +153,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome*
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor1"/>
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor1" value=<?php echo="$nome_autor1"; ?> />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome*
                 </label>
-                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_autor1" />
+                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_autor1" value=<?php echo="$sobrenome_autor1"; ?> />
             </div>
 
         </div>
@@ -123,14 +172,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor2" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor2" value=<?php echo="$nome_autor2"; ?> />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor2" />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor2" value=<?php echo="$sobrenome_autor2"; ?>/>
             </div>
 
         </div>
@@ -142,14 +191,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_autor3" />
+                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_autor3" value=<?php echo="$nome_autor3"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor3" />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor3" value=<?php echo="sobrenome_autor3"; ?>/>
             </div>
 
         </div>
@@ -160,21 +209,21 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     Titulo do trabalho*
                 </label>
-                <input type="text" placeholder="Ex: Loucuras discretas" class="form-control" name="titulo" />
+                <input type="text" placeholder="Ex: Loucuras discretas" class="form-control" name="titulo" value=<?php echo="$titulo"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     Subtitulo do trabalho
                 </label>
-                <input type="text" placeholder="Ex: seminário sobre as psicoses ordinárias" class="form-control" name="subtitulo" />
+                <input type="text" placeholder="Ex: seminário sobre as psicoses ordinárias" class="form-control" name="subtitulo" value=<?php echo="$subtitulo"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     Tipo do trabalho*
                 </label>
-                <select class="custom-select" name="trabalho">
+                <select class="custom-select" name="trabalho" value=<?php echo="$trabalho"; ?>>
                     <option value="Tese">Tese</option>
                     <option value="Dissertação">Dissertação</option>
                     <option value="TCC(Especialização)">TCC(Especialização)</option>
@@ -190,21 +239,21 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     Ano*
                 </label>
-                <input type="text" placeholder="Ex: 2022" class="form-control" name="ano" />
+                <input type="text" placeholder="Ex: 2022" class="form-control" name="ano" value=<?php echo="$ano"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     Código Cutter* <a href="http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/cutter">ver tabela</a>
                 </label>
-                <input type="text" placeholder="Ex: 111" class="form-control" name="cutter" />
+                <input type="text" placeholder="Ex: 111" class="form-control" name="cutter" value=<?php echo="$cutter"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     Curso*
                 </label>
-                <select class="custom-select" name="programa">
+                <select class="custom-select" name="programa" value=<?php echo="$programa"; ?>>
                     <option selected>Escolha o curso</option>
                     <option value="em Bacharelado em Engenharia Cívil">Engenharia Cívil</option>
                     <option value="em Licenciatura em Química">Licenciatura em Química</option>
@@ -221,22 +270,22 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome*
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_ori" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_ori" value=<?php echo="$nome_ori"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome*
                 </label>
-                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_ori"/>
+                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_ori" value=<?php echo="$sobrenome_ori"; ?>/>
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="Dr. " id="defaultCheck1" name="doutorado">
+                <input class="form-check-input" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1" name="doutorado">
                 <label class="form-check-label" for="defaultCheck1" >Doutor
                 </label>
                 <br>
-                <input class="form-check-input" type="checkbox" value="" name="orientadora">
+                <input class="form-check-input" type="checkbox" value=<?php echo=""; ?> name="orientadora">
 
                 <label class="form-check-label" for="defaultCheck1" >
                     Orientadora
@@ -252,22 +301,22 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_coori1" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_coori1" value=<?php echo="$nome_coori1"; ?>/>
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori1" />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori1" value=<?php echo="sobrenome_coori1"; ?>/>
             </div>
             <div class="form-group col-md-4"  align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="Dr. " id="defaultCheck1" name="doutorado1">
+                <input class="form-check-input" type="checkbox" vvalue=<?php echo=""; ?> id="defaultCheck1" name="doutorado1">
                 <label class="form-check-label" for="defaultCheck1">
                     Doutor
                 </label><br>
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="coorientadora1">
+                <input class="form-check-input" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1" name="coorientadora1">
 
                 <label class="form-check-label" for="defaultCheck1">
                     Orientadora
@@ -282,22 +331,22 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_coori2"  />
+                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_coori2" value=<?php echo="$nome_coori2";?> />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori2"  />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori2"  value=<?php echo="$sobrenome_coori2"; ?>/>
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="Dr. " name="doutorado2">
+                <input class="form-check-input" type="checkbox" value=<?php echo="";?> name="doutorado2">
                 <label class="form-check-label" for="defaultCheck1">
                     Doutor
                 </label><br>
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="coorientadora2">
+                <input class="form-check-input" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1" name="coorientadora2">
 
                 <label class="form-check-label" for="defaultCheck1">
                     Orientadora
@@ -313,46 +362,46 @@ if (!isset($_POST["Enviar"])) {
         <br>
             <div class="form-check">
 
-              <input class="form-check-input" name="siglas" type="checkbox" value="1" id="defaultCheck1">
+              <input class="form-check-input" name="siglas" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
               <label class="form-check-label" for="defaultCheck1">Siglas</label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" name="mapas" type="checkbox" value="1" id="defaultCheck1">
+          <input class="form-check-input" name="mapas" type="checkbox" value=<?php echo="" ;?> id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">Mapas</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="fotografias" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="fotografias" type="checkbox" value=<?php echo="" ;?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Fotografias</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="abreviaturas" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="abreviaturas" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Abreviaturas</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="simbolos" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="simbolos" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Símbolos</label>
         </div>
 
         <div>
             <div>
             <div class="form-check">
-            <input class="form-check-input" name="graficos" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="graficos" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Gráfico</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="tabelas" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="tabelas" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Tabelas</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="algoritmos" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="algoritmos" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Algoritmos</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="figuras" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="figuras" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Lista de Figuras</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" name="lista_tabelas" type="checkbox" value="1" id="defaultCheck1">
+            <input class="form-check-input" name="lista_tabelas" type="checkbox" value=<?php echo=""; ?> id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">Lista de Tabelas</label>
         </div>
         </div>
@@ -364,9 +413,9 @@ if (!isset($_POST["Enviar"])) {
         <label class="form-check-label" for="exampleRadios1">Ilustrações: </label><br>
         <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="ilustracao" value="1">
+            <input class="form-check-input" type="radio" name="ilustracao" value=<?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio">
+            <input class="form-check-input" type="radio" value=<?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
@@ -374,9 +423,9 @@ if (!isset($_POST["Enviar"])) {
     <label class="form-check-label" for="exampleRadios1">Bibliografia: </label><br>
     <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="bibliografia" value="1">
+            <input class="form-check-input" type="radio" name="bibliografia" value="1" <?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio"  >
+            <input class="form-check-input" type="radio"  <?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
@@ -384,9 +433,9 @@ if (!isset($_POST["Enviar"])) {
         <label class="form-check-label" for="exampleRadios1">Anexos: </label> <br>  
         <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="anexo"  value="1">
+            <input class="form-check-input" type="radio" name="anexo"  value=<?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio">
+            <input class="form-check-input" type="radio" value=<?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
@@ -394,9 +443,9 @@ if (!isset($_POST["Enviar"])) {
      <label class="form-check-label" for="exampleRadios1">Apêndice: </label><br>
     <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="apendice" value="1" >
+            <input class="form-check-input" type="radio" name="apendice" value="1" value=<?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio">
+            <input class="form-check-input" type="radio" value=<?php echo=""; ?>>
             <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
@@ -408,11 +457,11 @@ if (!isset($_POST["Enviar"])) {
         <br><br>
     <div class="form-group">
             <label for="formGroupExampleInput2">Nº de folhas em romano</label>
-            <input type="text" name="pags_roma" class="form-control" id="formGroupExampleInput2" placeholder="Ex: XVI">
+            <input type="text" name="pags_roma" class="form-control" id="formGroupExampleInput2" placeholder="Ex: XVI" value=<?php echo="$n_pags_rom"; ?>>
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput">Nº de folhas em arábico</label>
-            <input type="text" name="pags" class="form-control" id="formGroupExampleInput" placeholder="Ex: 123">
+            <input type="text" name="pags" class="form-control" id="formGroupExampleInput" placeholder="Ex: 123" value=<?php echo="$n_pags"; ?>>
         </div>
     </div>
         
@@ -427,21 +476,21 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                      (min. 1, max. 5)
                 </label>
-                <input type="text" name="assunto1" placeholder="Ex: Programação procedural" class="form-control" id="exampleInputEmail1" />
+                <input type="text" name="assunto1" placeholder="Ex: Programação procedural" class="form-control" id="exampleInputEmail1" value=<?php echo="$assunto1"; ?>/>
             </div>
             <div class="form-group col-md-12">
-                <input type="text" name="assunto2" placeholder="Ex: Engenharia de alimentos" class="form-control" id="exampleInputEmail1" />
+                <input type="text" name="assunto2" placeholder="Ex: Engenharia de alimentos" class="form-control" id="exampleInputEmail1" value=<?php echo="$assunto2"; ?>/>
             </div>
             <div class="form-group col-md-12">
-                <input type="text" name="assunto3" placeholder="Ex: Química industrial" class="form-control" id="exampleInputEmail1" />
+                <input type="text" name="assunto3" placeholder="Ex: Química industrial" class="form-control" id="exampleInputEmail1" value=<?php echo="$assunto3"; ?>/>
             </div>
             
             <div class="form-group col-md-12">
-                <input type="text" name="assunto4" placeholder="Ex: Desenvolvimento regional" class="form-control" id="exampleInputEmail1" />
+                <input type="text" name="assunto4" placeholder="Ex: Desenvolvimento regional" class="form-control" id="exampleInputEmail1" value=<?php echo="$assunto4"; ?>/>
             </div>
 
             <div class="form-group col-md-12">
-                <input type="text" name="assunto5" placeholder="Ex: Adaptação social" class="form-control" id="exampleInputEmail1" />
+                <input type="text" name="assunto5" placeholder="Ex: Adaptação social" class="form-control" id="exampleInputEmail1" value=<?php echo="$assunto5"; ?>/>
             </div>
 
         </div>

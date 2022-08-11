@@ -6,5 +6,5 @@
 	$lista = $conexao->prepare("delete from ficha where ficha.id = '$id'");
 	$lista->execute();
 	$itens = $lista->fetchAll(PDO::FETCH_OBJ);
-	header("Location:menu.php");
+	header("Location:menu_servidor.php");
 ?>

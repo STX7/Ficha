@@ -68,22 +68,29 @@ if (!isset($_POST["Enviar"])) {
 
     <!-- Menu  --------------------------------- -->
 
-    <div class="container" >
+    <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Menu</a>
+          <a class="navbar-brand" href="menu_servidor.php">Menu</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Pedidos<span class="sr-only">(current)</span></a>
+              
+            <li class="nav-item">
+                <a class="nav-link" href="Tutorial_fichacat_2011.pdf">Informações</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Histórico</a>
+                <a class="nav-link" href="#">Alterar dados</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Informações</a>
+                <a class="nav-link" href="ficha_usuario.php">Gerar ficha</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="historico.php">Histórico</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php">Sair</a>
             </li>
             
       </ul>
@@ -697,6 +704,10 @@ if (!isset($_POST["Enviar"])) {
     $pdf->ezText("\n$xyz", 9, array('left' => 375));
 
 
-    $pdf->ezStream(array('Content-Disposition'=>'ficha.pdf','download' => 1));
+    //$pdf->ezStream(array('Content-Disposition'=>'ficha.pdf','download' => 1));
+    $pdfcode = $pdf->ezOutput();
+    $fp = fopen("C:/wamp64/www/ADS/src/fichas/$nome_autor1-ficha.pdf",'wb');
+    fwrite($fp,$pdfcode);
+    fclose($fp);
     
-}
+    }
