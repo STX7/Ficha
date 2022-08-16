@@ -8,48 +8,6 @@ $id_aluno = $_SESSION['user'];
     $itens = $lista2->fetch(PDO::FETCH_OBJ);
 
 
-    $nome_autor1 = $itens->n_autor1;
-    $sobrenome_autor1 = $itens->s_autor1;
-    $nome_autor2 =  $itens->n_autor2;
-    $sobrenome_autor2 = $itens->s_autor2;
-    $nome_autor3 = $itens->n_autor3;
-    $sobrenome_autor3 = $itens->s_autor3;
-    $titulo = $itens->titulo;
-    $subtitulo = $itens->sub_titulo;
-    $cutter = $itens->codigo;
-    $trabalho = $itens->trabalho;
-    $programa = $itens->curso;
-    $nome_ori = $itens->n_orientador;
-    $sobrenome_ori = $itens->s_orientador;
-    $nome_coori1 = $itens->n_coorientador1;
-    $sobrenome_coori1 = $itens->s_coorientador1;
-    $nome_coori2 = $itens->n_coorientador2;
-    $sobrenome_coori2 = $itens->s_coorientador2;
-    //$orientadora = $itens->;
-    //$coorientadora1 = $itens->
-    //$coorientadora1 = $itens->
-    $ano = $itens->ano;
-    $pags = $itens->n_pags;
-    $pags_roma = $itens->n_pags_rom;
-    $assunto1 = $itens->assunto1;
-    $assunto2 = $itens->assunto2;
-    $assunto3 = $itens->assunto3;
-    $assunto4 = $itens->assunto4;
-    $assunto5 = $itens->assunto5;
-    $sigla = $itens->siglas;
-    $mapa = $itens->mapas;
-    $fotografias = $itens->fotografias;
-    $abreviaturas = $itens->abreviaturas;
-    $simbolos = $itens->simbolos;
-    $graficos = !$itens->graficos;
-    $tabelas = $itens->tabelas;
-    $algoritmos = $itens->algoritmos;
-    $figuras = $itens->lista_figuras;
-    $lista_tabela = $itens->lista_tabelas;
-    $ilustracao = $itens->ilustracoes;
-    $bibliografia = $itens->bibliografia;
-    $anexo = $itens->anexos;
-    $apendice = $itens->apendice;
 
 /**
 /**
@@ -154,14 +112,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome*
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor1" value="<?php echo "$nome_autor1"; ?>" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor1" value="<?php echo "$itens->n_autor1"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome*
                 </label>
-                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_autor1" value="<?php echo "$sobrenome_autor1"; ?>" />
+                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_autor1" value="<?php echo "$itens->s_autor1;"; ?>" />
             </div>
 
         </div>
@@ -173,7 +131,7 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor2" value="<?php echo "$nome_autor2"; ?>" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor2" value="<?php echo "$itens->n_autor2;"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
@@ -515,6 +473,10 @@ if (!isset($_POST["Enviar"])) {
             <label for="formGroupExampleInput">Nº de folhas em arábico</label>
             <input type="text" name="pags" class="form-control" id="formGroupExampleInput" placeholder="Ex: 123" value="<?php echo $itens->n_pags; ?>" >
         </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">CDD</label>
+            <input type="text" name="CDD" class="form-control" id="formGroupExampleInput" placeholder="Ex: 123" value="<?php echo $itens->cdd; ?>" >
+        </div>
     </div>
         
 
@@ -602,7 +564,7 @@ if (!isset($_POST["Enviar"])) {
     $assunto3 = ($_POST["assunto3"]);
     $assunto4 = ($_POST["assunto4"]);
     $assunto5 = ($_POST["assunto5"]);
-
+    $cdd = ($_POST["CDD"]);
     // monta informações da ficha catalográfica
     if  (empty($nome_autor3))// caso tenha 3º autor 
         if(empty($nome_autor2))// caso tenha 2º autor
@@ -712,6 +674,7 @@ where ficha.id = '$id' ");
     $lista->bindValue(':value_39', $assunto5);
     $status = 0;
     $lista->bindValue(':value_40', $status);
+    $lista->bindValue(':value41', $cdd);
 
     $lista->execute();
     

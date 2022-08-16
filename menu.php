@@ -75,7 +75,7 @@
           <th scope='row'></th>
           <td>$item->n_autor1</td>
           <td>$item->titulo</td>
-          <td><a href='editar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
+          <td><a href='alterar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
           <td><a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='50' width='50'></a></td>
         </tr>";
 
