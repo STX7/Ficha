@@ -59,8 +59,8 @@
           <th scope='col'> </th>
           <th scope='col'>Nome</th>
           <th scope='col'>Titulo</th>
-          <th scope='col'> </th>
-          <th scope='col'> </th>
+          <th scope='col'>Editar</th>
+          <th scope='col'>Excluir</th>
         </tr>
       </thead>
       <tbody>";
@@ -68,15 +68,18 @@
            echo "<tr><th scope='row'></th><th scope='row'>Você não possui fichas cadastradas</th></tr>";
         }
         else{
-            
-        foreach ($itens as $item) {
 
+        foreach ($itens as $item) {
             echo "<tr>
           <th scope='row'></th>
           <td>$item->n_autor1</td>
           <td>$item->titulo</td>
-          <td><a href='alterar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
-          <td><a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='50' width='50'></a></td>
+          <td>
+            <a href='alterar.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+          </td>
+          <td>
+            <a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+          </td>
         </tr>";
 
 

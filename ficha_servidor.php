@@ -546,17 +546,17 @@ if (!isset($_POST["Enviar"])) {
     // monta informações da ficha catalográfica
     if  (empty($nome_autor3))// caso tenha 3º autor 
         if(empty($nome_autor2))// caso tenha 2º autor
-            $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
+            $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1;
         else
-            $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
+            $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2;
     else
-    $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . ", "  . $nome_autor3 . " " . $sobrenome_autor3 .  "; $orientadora " . $nome_ori . " " . $sobrenome_ori;
+    $texto = $sobrenome_autor1 . ", " . $nome_autor1 . "\n   " . $titulo . " / " . $nome_autor1 . " " . $sobrenome_autor1 . ", " . $nome_autor2 . " " . $sobrenome_autor2 . ", "  . $nome_autor3 . " " . $sobrenome_autor3;
     
     
     if (!empty($pags_roma)) //numeros romanos
-        $texto .= (". -- Uruaçu, " . $ano . ".\n   $pags p.\n   $pags_roma p.\n\n   ");
+        $texto .= (". - Uruaçu, " . $ano . ".\n   $pags p.\n   $pags_roma p.\n\n   ");
     else
-        $texto .= (". -- Uruaçu, " . $ano . ".\n   $pags p.\n\n   ");  
+        $texto .= (". - Uruaçu, " . $ano . ".\n   $pags p.\n\n   ");  
     
 
     if (empty($_POST["doutorado"]))//caso orientador tenha doutorado
@@ -569,20 +569,20 @@ if (!isset($_POST["Enviar"])) {
         if (!empty($nome_coori2)) { //caso tenha coorientador 2
 
             if (!empty($doutorado2)) { // caso coorientador 2 tenha doutorado
-                $texto .= "     $coorientadora2: Prof. Dr. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n"; 
+                $texto .= "     $coorientadora2: Prof. Dr. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n\n"; 
             }else{
-                $texto .= "     $coorientadora2: Prof. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n";
+                $texto .= "     $coorientadora2: Prof. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n\n";
             }
             
             
         }
         if (!empty($doutorado1)) {//caso coorientador 1 tenha doutorado
-                $texto .= "     $coorientadora1: Prof. Dr. " . $nome_coori1 . " " . $sobrenome_coori1 . "\n"; 
+                $texto .= "     $coorientadora1: Prof. Dr. " . $nome_coori1 . " " . $sobrenome_coori1 . "\n\n"; 
             }else{
-                $texto .= "     $coorientadora1: Prof" . $nome_coori1 . " " . $sobrenome_coori1 . "\n";
+                $texto .= "     $coorientadora1: Prof" . $nome_coori1 . " " . $sobrenome_coori1 . "\n\n";
             }
-        
 
+        
         }
 
 
@@ -590,6 +590,7 @@ if (!isset($_POST["Enviar"])) {
     //aplica código CDD
     
     $xyz = filter_input(INPUT_POST, 'CDD', FILTER_SANITIZE_SPECIAL_CHARS);
+
     if ($trabalho == "Tese")
         $texto .= " (Doutorado";
     if ($trabalho == "Dissertação")
@@ -608,7 +609,7 @@ if (!isset($_POST["Enviar"])) {
     else
         $texto .= (" - Curso de Graduação ") . $programa;
 
-    $texto .= (") -- Instituto Federal de Educação Ciência e tecnologia de Goiás, Câmpus Uruaçu, $ano.\n");
+    $texto .= (") - Instituto Federal de Educação Ciência e tecnologia de Goiás, Câmpus Uruaçu, $ano.\n");
 
 
     if (!empty($_POST["ilustracao"]))
@@ -679,12 +680,12 @@ if (!isset($_POST["Enviar"])) {
 
     if  (empty($nome_coori2)){ //caso tenha coorientador2
         if (empty($nome_coori1)){
-            $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. ";}
+            $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. Instituto Federal de Educação Ciência e tecnologia de Goiás, Câmpus Uruaçu, $ano. III.";}
         else{
-            $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. $sobrenome_coori1, $nome_coori1, coorient. III. ";}
+            $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. $sobrenome_coori1, $nome_coori1, coorient. III. Instituto Federal de Educação Ciência e tecnologia de Goiás, Câmpus Uruaçu, $ano. IV.";}
         }
     else{
-        $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. $sobrenome_coori1, $nome_coori1, coorient. III. $sobrenome_coori2, $nome_coori2, coorient. IV. ";
+        $texto .= "I. $sobrenome_ori, $nome_ori, orient. II. $sobrenome_coori1, $nome_coori1, coorient. III. $sobrenome_coori2, $nome_coori2, coorient. IV. Instituto Federal de Educação Ciência e tecnologia de Goiás, Câmpus Uruaçu, $ano. V.";
     $texto .= ("Título. ");}
 
     
@@ -701,13 +702,16 @@ if (!isset($_POST["Enviar"])) {
     $pdf->ezText(("Ficha de identificação da obra elaborada pelo autor, através do\n Programa de Geração de Ficha Automática do IFG/Câmpus Uruaçu\n\n"), 10, array('justification' => 'center'));
     $pdf->selectFont('pdf-php/src/fonts/Times-Roman.afm');
     $pdf->ezTable($ficha, '', '', array('fontSize' => 9, 'showHeadings' => 0, 'showLines' => 0, 'width' => 340, 'cols' => array('cod' => array('width' => 45))));
-    $pdf->ezText("\n$xyz", 9, array('left' => 375));
+    $pdf->ezText("\n CDD $xyz", 9, array('left' => 375));
 
 
-    $pdf->ezStream(array('Content-Disposition'=>'ficha.pdf','download' => 1));
+    $pdf->ezStream();
+    //header("location: menu_servidor.php");
     /*$pdfcode = $pdf->ezOutput();
-    $fp = fopen("C:/wamp64/www/ADS/src/fichas/$nome_autor1-ficha.pdf",'wb');
+    $fp = fopen("./fichas/$nome_autor1-ficha.pdf",'wb');
     fwrite($fp,$pdfcode);
-    fclose($fp);*/
-    
+    fclose($fp);
+
+    */
+
     }

@@ -60,52 +60,68 @@
       <thead >
         <tr>
           <th scope='col'> </th>
-          <th scope='col'>Nome</th>
-          <th scope='col'>Titulo</th>
-          <th scope='col'> </th>
-          <th scope='col'> </th>
-        </tr>
+          <th scope='col'>Obra</th>
+          <th scope='col'>Editar</th>
+          <th scope='col'>Excluir</th>
+          <th scope='col'>Enviar</th>
       </thead>
       <tbody>";
         if (empty($itens)) {
-           echo "<tr><th scope='row'></th><th scope='row'>Você não possui fichas cadastradas</th></tr>";
+       echo "<tr><th scope='row'></th><th scope='row'>Não existe fichas cadastradas</th></tr>";
+    }
+    else{
+        $contador = 0;
+    foreach ($itens as $item) {
+        $contador = $contador +1;
+        if ($item->status == 0) {
+          echo "<tr>
+      <th scope='row'>$contador</th>
+      <td><h6>$item->n_autor1</h6>$item->titulo</td>
+      <td>
+      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+      </td>
+      <td>
+      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+      </td>
+      <td>
+      <a href='email.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='40' width='40'></a>
+      </td>
+    </tr>";  
         }
-        else{
-            
-        foreach ($itens as $item) {
-            if ($item->status == 0) {
-              echo "<tr>
-          <th scope='row'></th>
-          <td>$item->n_autor1</td>
-          <td>$item->titulo</td>
-          <td><a href='editar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
-          <td><a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='50' width='50'></a></td>
-        </tr>";  
-            }
-            if ($item->status == 1) {
-               echo "<tr class='table-warning'>
-          <th scope='row'></th>
-          <td>$item->n_autor1</td>
-          <td>$item->titulo</td>
-          <td><a href='editar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
-          <td><a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='50' width='50'></a></td>
-        </tr>"; 
-            }
-            if ($item->status == 2) {
-               echo "<tr class='table-info'>
-          <th scope='row'></th>
-          <td>$item->n_autor1</td>
-          <td>$item->titulo</td>
-          <td><a href='editar.php?id=$item->id'><img alt='Editar'  src='.\\img\\pen.svg' height='50' width='50'></a></td>
-          <td><a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='50' width='50'></a></td>
-        </tr>"; 
-            }
-            
-
-
+        if ($item->status == 1) {
+           echo "<tr class='table-warning'>
+      <th scope='row'>$contador</th>
+      <td><h6>$item->n_autor1</h6>$item->titulo</td>
+      <td>
+      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+      </td>
+      <td>
+      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+      </td>
+      <td>
+      <a href='email.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='40' width='40'></a>
+      </td>
+    </tr>"; 
         }
-
+        if ($item->status == 2) {
+           echo "<tr class='table-info'>
+      <th scope='row'>$contador</th>
+      <td><h6>$item->n_autor1</h6>$item->titulo</td>
+      <td>
+      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+      </td>
+      <td>
+      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+      </td>
+      <td>
+      <a href='email.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='40' width='40'></a>
+      </td>
+    </tr>"; 
         }
+        
+    }
+
+    }
         echo "</tbody></table>";
     	
     ?>

@@ -477,8 +477,19 @@ if (!isset($_POST["Enviar"])) {
     $subtitulo = ($_POST["subtitulo"]);
     $cutter = $_POST["cutter"];
 
-    $trabalho = ($_POST["trabalho"]);  // tese / dissertação
-    $programa = ($_POST["programa"]);  // cursos ...
+
+    if ($_POST["programa"] == "em Bacharelado em Engenharia Cívil") {
+        $cdd = "624";
+    }
+    if ($_POST["programa"] == "em Licenciatura em Química") {
+        $cdd = "540";
+    }
+    if ($_POST["programa"] == "em Ánalise e Desenvolvimento de sistemas") {
+        $cdd = "004";
+    }
+
+    $trabalho = ($_POST["trabalho"]); // tese / dissertação
+    $programa = ($_POST["programa"]); // cursos ...
     $nome_ori = ($_POST["nome_ori"]); // nome do orientador
     $sobrenome_ori = ($_POST["sobrenome_ori"]); // sobrenome do orientador
 
@@ -542,7 +553,7 @@ if (!isset($_POST["Enviar"])) {
     $apendice = !empty($_POST["apendice"]) ? 1 : 0;
  
 try {
-    $lista = $conexao->prepare("insert into ficha (`n_autor1`, `s_autor1`, `n_autor2`, `s_autor2`, `n_autor3`, `s_autor3`, `titulo`, `sub_titulo`, `codigo`, `trabalho`, `curso`, `n_orientador`, `s_orientador`, `n_coorientador1`, `s_coorientador1`, `n_coorientador2`, `s_coorientador2`, `ano`, `n_pags`, `n_pags_rom`, `siglas`, `mapas`, `fotografias`, `abreviaturas`, `simbolos`, `graficos`, `tabelas`, `algoritmos`, `lista_figuras`, `lista_tabelas`, `ilustracoes`, `bibliografia`, `anexos`, `apendice`, `assunto1`, `assunto2`, `assunto3`, `assunto4`, `assunto5`, `id_usuario`, `status`) values(:a, :b, :c, :d, :e, :f, :g, :h, :i, :j, :k, :l, :m, :n, :o, :p, :q, :r, :s, :t, :u, :v, :w, :x, :y, :z, :aa, :ab, :ac, :ad, :ae, :af, :ag, :ah, :ai, :aj, :ak, :al, :am, :an, :ao)");
+    $lista = $conexao->prepare("insert into ficha (`n_autor1`, `s_autor1`, `n_autor2`, `s_autor2`, `n_autor3`, `s_autor3`, `titulo`, `sub_titulo`, `codigo`, `cdd`, `trabalho`, `curso`, `n_orientador`, `s_orientador`, `n_coorientador1`, `s_coorientador1`, `n_coorientador2`, `s_coorientador2`, `ano`, `n_pags`, `n_pags_rom`, `siglas`, `mapas`, `fotografias`, `abreviaturas`, `simbolos`, `graficos`, `tabelas`, `algoritmos`, `lista_figuras`, `lista_tabelas`, `ilustracoes`, `bibliografia`, `anexos`, `apendice`, `assunto1`, `assunto2`, `assunto3`, `assunto4`, `assunto5`, `id_usuario`, `status`) values(:a, :b, :c, :d, :e, :f, :g, :h, :i, :ap, :j, :k, :l, :m, :n, :o, :p, :q, :r, :s, :t, :u, :v, :w, :x, :y, :z, :aa, :ab, :ac, :ad, :ae, :af, :ag, :ah, :ai, :aj, :ak, :al, :am, :an, :ao)");
     $lista->bindValue(':a', $nome_autor1);
     $lista->bindValue(':b', $sobrenome_autor1);
     $lista->bindValue(':c', $nome_autor2);
@@ -552,6 +563,7 @@ try {
     $lista->bindValue(':g', $titulo);
     $lista->bindValue(':h', $subtitulo);
     $lista->bindValue(':i', $cutter);
+    $lista->bindValue(':ap', $cdd);
     $lista->bindValue(':j', $trabalho);
     $lista->bindValue(':k', $programa);
     $lista->bindValue(':l', $nome_ori);
@@ -596,11 +608,3 @@ try {
 
 
 }
-
-/**
-$cursos = [
-0 => ['nome'=> "ADS", "cdd" => 004],
-1 => ['nome'=> "Quimica", "cdd" => 005]
-];
-
-**/

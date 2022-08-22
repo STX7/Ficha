@@ -150,14 +150,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_autor3" value="<?php echo "$nome_autor3"; ?>" />
+                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_autor3" value="<?php echo "$itens->n_autor3"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor3" value="<?php echo "sobrenome_autor3"; ?>" />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor3" value="<?php echo "$itens->s_autor3"; ?>" />
             </div>
 
         </div>
@@ -168,14 +168,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     Titulo do trabalho*
                 </label>
-                <input type="text" placeholder="Ex: Loucuras discretas" class="form-control" name="titulo" value="<?php echo "$titulo"; ?>" />
+                <input type="text" placeholder="Ex: Loucuras discretas" class="form-control" name="titulo" value="<?php echo "$itens->titulo"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     Subtitulo do trabalho
                 </label>
-                <input type="text" placeholder="Ex: seminário sobre as psicoses ordinárias" class="form-control" name="subtitulo" value="<?php echo "$subtitulo"; ?>" />
+                <input type="text" placeholder="Ex: seminário sobre as psicoses ordinárias" class="form-control" name="subtitulo" value="<?php echo "$itens->sub_titulo"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
@@ -184,11 +184,11 @@ if (!isset($_POST["Enviar"])) {
                 </label>
                 <select class="custom-select" name="trabalho" value="">
 
-                  <option value='Tese' <?php echo $trabalho == "Tese" ?  "selected" : "" ?>>Tese</option>
-                  <option value='Dissertação'<?php echo $trabalho == "Dissertação" ?  "selected" : "" ?>>Dissertação</option>
-                  <option value='TCC(Especialização)'<?php echo $trabalho == "TCC(Especialização)" ?  "selected" : "" ?>>TCC(Especialização)</option>
-                  <option value='TCC(Graduação)'<?php echo $trabalho == "TCC(Graduação)" ?  "selected" : "" ?>>TCC(Graduação)</option>
-                  <option value='TCC(Stricto Sensu)'<?php echo $trabalho == "TCC(Stricto Sensu)" ?  "selected" : "" ?>>TCC(Stricto Sensu)</option>
+                  <option value='Tese' <?php echo $itens->trabalho == "Tese" ?  "selected" : "" ?>>Tese</option>
+                  <option value='Dissertação'<?php echo $itens->trabalho == "Dissertação" ?  "selected" : "" ?>>Dissertação</option>
+                  <option value='TCC(Especialização)'<?php echo $itens->trabalho == "TCC(Especialização)" ?  "selected" : "" ?>>TCC(Especialização)</option>
+                  <option value='TCC(Graduação)'<?php echo $itens->trabalho == "TCC(Graduação)" ?  "selected" : "" ?>>TCC(Graduação)</option>
+                  <option value='TCC(Stricto Sensu)'<?php echo $itens->trabalho == "TCC(Stricto Sensu)" ?  "selected" : "" ?>>TCC(Stricto Sensu)</option>
                 </select>
             </div>
 
@@ -199,14 +199,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     Ano*
                 </label>
-                <input type="text" placeholder="Ex: 2022" class="form-control" name="ano" value="<?php echo "$ano"; ?>" />
+                <input type="text" placeholder="Ex: 2022" class="form-control" name="ano" value="<?php echo "$itens->ano"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     Código Cutter* <a href="http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/cutter">ver tabela</a>
                 </label>
-                <input type="text" placeholder="Ex: 111" class="form-control" name="cutter" value="<?php echo "$cutter"; ?>" />
+                <input type="text" placeholder="Ex: 111" class="form-control" name="cutter" value="<?php echo "$itens->codigo"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
@@ -230,14 +230,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome*
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_ori" value="<?php echo "$nome_ori"; ?>" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_ori" value="<?php echo "$itens->n_orientador"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome*
                 </label>
-                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_ori" value=<?php echo "$sobrenome_ori"; ?> />
+                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_ori" value=<?php echo "$itens->s_orientador"; ?> />
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
@@ -261,14 +261,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_coori1" value="<?php echo "$nome_coori1"; ?>" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_coori1" value="<?php echo "$itens->n_coorientador1"; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori1" value=<?php echo "sobrenome_coori1"; ?> />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori1" value=<?php echo "$itens->s_coorientador1"; ?> />
             </div>
             <div class="form-group col-md-4"  align="left" style="left: 20px;">
                 <br>
@@ -291,14 +291,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_coori2" value="<?php echo "$nome_coori2";?>" />
+                <input type="text" placeholder="Ex: fulano dos Santos" class="form-control" name="nome_coori2" value="<?php echo "$itens->n_coorientador2";?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori2"  value="<?php echo "$sobrenome_coori2"; ?>" />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori2"  value="<?php echo "$itens->s_coorientador2"; ?>" />
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
@@ -600,6 +600,7 @@ try {
     `titulo` = :value_7,
     `sub_titulo` = :value_8,
     `codigo` = :value_9,
+    `cdd` = :value_41,
     `trabalho` = :value_10,
     `curso` = :value_11,
     `n_orientador` = :value_12,
@@ -674,7 +675,7 @@ where ficha.id = '$id' ");
     $lista->bindValue(':value_39', $assunto5);
     $status = 0;
     $lista->bindValue(':value_40', $status);
-    $lista->bindValue(':value41', $cdd);
+    $lista->bindValue(':value_41', $cdd);
 
     $lista->execute();
     
