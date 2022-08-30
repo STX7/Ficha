@@ -1,19 +1,11 @@
-    <?php
-require("conexao.php");
-session_start();
-$id_aluno = $_SESSION['user'];
-    $id = $_GET['id'];
-    $lista2 = $conexao->prepare("select * from ficha where ficha.id = '$id'");
-    $lista2->execute();
-    $itens = $lista2->fetch(PDO::FETCH_OBJ);
-
-
-
+<?php
 /**
 /**
  * 
  * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
  * 
+ * Copyright © 2022 Estágio - ADS / IFG - Uruaçu
+ *
  * Este programa é um software livre; você pode redistribuí-lo e/ou 
  * modificá-lo sob os termos da Licença Pública Geral GNU como 
  * publicada pela Fundação do Software Livre (FSF); na versão 3 da 
@@ -24,6 +16,7 @@ $id_aluno = $_SESSION['user'];
  * a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a
  * Licença Pública Geral GNU para mais detalhes.
  * 
+ *
  * Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
  * com este programa. Se não, veja <http://www.gnu.org/licenses/>.
  * 
@@ -31,18 +24,17 @@ $id_aluno = $_SESSION['user'];
 
 /** 
  * <p> 
- * Ficha Catalográfica para Teses e Dissertações - ICMC
+ * Ficha Catalográfica para Teses e Dissertações - IFG
  * </p> 
  * 
- * Universidade de São Paulo
- * Instituto de Ciências Matemáticas e de Computação (ICMC).
  * 
  * Contato: 
- * - Seção Técnica de Informática - sti@icmc.usp.br 
- * - Biblioteca Prof. Achille Bassi - biblio@icmc.usp.br
  * 
  * Este aplicativo utiliza o pacote PHP Pdf, que pode ser baixado a partir de 
- * http://sourceforge.net/projects/pdf-php/
+ * https://github.com/rospdf/pdf-php
+ *
+ * Este aplicativo utiliza o pacote PHP Mailer, que pode ser baixado a partir de 
+ * https://github.com/PHPMailer/PHPMailer
  * 
  * Este aplicativo utiliza a biblioteca de estilos do bootstrap v3 que pode ser obtido em
  * http://getbootstrap.com/
@@ -50,12 +42,28 @@ $id_aluno = $_SESSION['user'];
  * Os arquivos associados ao quadro de ajuda estão disponíveis em
  * http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/ficha
  *  
- * @author Maria Alice Soares de Castro - STI-ICMC
- * @copyright Seção Técnica de Informática - STI/ICMC
+ * @author Maria Alice Soares de Castro - STI-ICMC (2017)
+ * @copyright Seção Técnica de Informática - STI/ICMC (2017)
  * 
+ * Universidade de São Paulo
+ * Instituto de Ciências Matemáticas e de Computação (ICMC).
+ *
+ * @author Samuel da Silva dos Santos (2022)
+ * 
+ * Instituto Federal de Goiás - Campus Uruaçu
+ * Análise e Desenvolvimento de Sistemas.
  */
 
 ##########################################################################################
+require("conexao.php");
+session_start();
+$id_aluno = $_SESSION['user'];
+    $id = $_GET['id'];
+    $lista2 = $conexao->prepare("select * from ficha where ficha.id = '$id'");
+    $lista2->execute();
+    $itens = $lista2->fetch(PDO::FETCH_OBJ);
+
+
 // Verifica se foi entrado um nome no formulário
 // Se não houver valor para nome, apresenta o formulário para ser preenchido
 if (!isset($_POST["Enviar"])) { 

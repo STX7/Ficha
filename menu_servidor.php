@@ -1,4 +1,60 @@
 <?php
+/**
+/**
+ * 
+ * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
+ * 
+ * Copyright © 2022 Estágio - ADS / IFG - Uruaçu
+ *
+ * Este programa é um software livre; você pode redistribuí-lo e/ou 
+ * modificá-lo sob os termos da Licença Pública Geral GNU como 
+ * publicada pela Fundação do Software Livre (FSF); na versão 3 da 
+ * Licença, ou (a seu critério) qualquer versão posterior.
+ * 
+ * Este programa é distribuído na esperança de que possa ser útil, 
+ * mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO
+ * a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a
+ * Licença Pública Geral GNU para mais detalhes.
+ * 
+ *
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
+ * com este programa. Se não, veja <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+/** 
+ * <p> 
+ * Ficha Catalográfica para Teses e Dissertações - IFG
+ * </p> 
+ * 
+ * 
+ * Contato: 
+ * 
+ * Este aplicativo utiliza o pacote PHP Pdf, que pode ser baixado a partir de 
+ * https://github.com/rospdf/pdf-php
+ *
+ * Este aplicativo utiliza o pacote PHP Mailer, que pode ser baixado a partir de 
+ * https://github.com/PHPMailer/PHPMailer
+ * 
+ * Este aplicativo utiliza a biblioteca de estilos do bootstrap v3 que pode ser obtido em
+ * http://getbootstrap.com/
+ * 
+ * Os arquivos associados ao quadro de ajuda estão disponíveis em
+ * http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/ficha
+ *  
+ * @author Maria Alice Soares de Castro - STI-ICMC (2017)
+ * @copyright Seção Técnica de Informática - STI/ICMC (2017)
+ * 
+ * Universidade de São Paulo
+ * Instituto de Ciências Matemáticas e de Computação (ICMC).
+ *
+ * @author Samuel da Silva dos Santos (2022)
+ * 
+ * Instituto Federal de Goiás - Campus Uruaçu
+ * Análise e Desenvolvimento de Sistemas.
+ */
+
+##########################################################################################
 	session_start();
 	require("conexao.php");
 	$id = $_SESSION['user'];
@@ -20,7 +76,7 @@
 
     <!-- Menu  --------------------------------- -->
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light table" style="width:100%;">
           <a class="navbar-brand" href="menu_servidor.php">Menu</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -56,7 +112,7 @@
 	$lista = $conexao->prepare("select * from ficha where ficha.status = 1 or ficha.status = 0");
 	$lista->execute();
 	$itens = $lista->fetchAll(PDO::FETCH_OBJ);
-    echo "<table class='table'>
+    echo "<table class='table  table-sm'>
   <thead >
     <tr>
       <th scope='col'> </th>
@@ -64,6 +120,7 @@
       <th scope='col'>Editar</th>
       <th scope='col'>Excluir</th>
       <th scope='col'>Enviar</th>
+      <th scope='col'>Info</th>
     </tr>
   </thead>
   <tbody>";
@@ -79,13 +136,16 @@
       <th scope='row'>$contador</th>
       <td><h6>$item->n_autor1</h6>$item->titulo</td>
       <td>
-      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
       </td>
       <td>
-      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
       </td>
       <td>
-      <a href='email.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='40' width='40'></a>
+      <a href='mail.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='25' width='25'></a>
+      </td>
+      <td>
+      <a href='info.php?id=$item->id_usuario'><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
       </td>
     </tr>";  
         }
@@ -94,13 +154,16 @@
       <th scope='row'>$contador</th>
       <td><h6>$item->n_autor1</h6>$item->titulo</td>
       <td>
-      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
       </td>
       <td>
-      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
       </td>
       <td>
-      <a href='email.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='40' width='40'></a>
+      <a href='mail.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='25' width='25'></a>
+      </td>
+      <td>
+      <a href='info.php?id=$item->id_usuario'><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
       </td>
     </tr>"; 
         }
@@ -109,22 +172,22 @@
       <th scope='row'>$contador</th>
       <td><h6>$item->n_autor1</h6>$item->titulo</td>
       <td>
-      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
       </td>
       <td>
-      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
       </td>
       <td>
-      <a href='email.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='40' width='40'></a>
+      <a href='mail.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='25' width='25'></a>
+      </td>
+      <td>
+      <a href='info.php?id=$item->id_usuario'><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
       </td>
     </tr>"; 
-        }
-        
+        }    
     }
-
-    }
+}
     echo "</tbody></table>";
-	
 ?>
   
 

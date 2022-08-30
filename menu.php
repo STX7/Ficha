@@ -1,4 +1,60 @@
     <?php
+    /**
+/**
+ * 
+ * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
+ * 
+ * Copyright © 2022 Estágio - ADS / IFG - Uruaçu
+ *
+ * Este programa é um software livre; você pode redistribuí-lo e/ou 
+ * modificá-lo sob os termos da Licença Pública Geral GNU como 
+ * publicada pela Fundação do Software Livre (FSF); na versão 3 da 
+ * Licença, ou (a seu critério) qualquer versão posterior.
+ * 
+ * Este programa é distribuído na esperança de que possa ser útil, 
+ * mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO
+ * a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a
+ * Licença Pública Geral GNU para mais detalhes.
+ * 
+ *
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
+ * com este programa. Se não, veja <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+/** 
+ * <p> 
+ * Ficha Catalográfica para Teses e Dissertações - IFG
+ * </p> 
+ * 
+ * 
+ * Contato: 
+ * 
+ * Este aplicativo utiliza o pacote PHP Pdf, que pode ser baixado a partir de 
+ * https://github.com/rospdf/pdf-php
+ *
+ * Este aplicativo utiliza o pacote PHP Mailer, que pode ser baixado a partir de 
+ * https://github.com/PHPMailer/PHPMailer
+ * 
+ * Este aplicativo utiliza a biblioteca de estilos do bootstrap v3 que pode ser obtido em
+ * http://getbootstrap.com/
+ * 
+ * Os arquivos associados ao quadro de ajuda estão disponíveis em
+ * http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/ficha
+ *  
+ * @author Maria Alice Soares de Castro - STI-ICMC (2017)
+ * @copyright Seção Técnica de Informática - STI/ICMC (2017)
+ * 
+ * Universidade de São Paulo
+ * Instituto de Ciências Matemáticas e de Computação (ICMC).
+ *
+ * @author Samuel da Silva dos Santos (2022)
+ * 
+ * Instituto Federal de Goiás - Campus Uruaçu
+ * Análise e Desenvolvimento de Sistemas.
+ */
+
+##########################################################################################
     	session_start();
     	require("conexao.php");
     	$id = $_SESSION['user'];
@@ -75,10 +131,13 @@
           <td>$item->n_autor1</td>
           <td>$item->titulo</td>
           <td>
-            <a href='alterar.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='40' width='40'></a>
+            <a href='alterar.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
           </td>
           <td>
-            <a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='40' width='40'></a>
+            <a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
+          </td>
+          <td>
+            <a href=''><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
           </td>
         </tr>";
 

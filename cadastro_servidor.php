@@ -1,13 +1,69 @@
-        <?php
+<?php
+/**
+/**
+ * 
+ * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
+ * 
+ * Copyright © 2022 Estágio - ADS / IFG - Uruaçu
+ *
+ * Este programa é um software livre; você pode redistribuí-lo e/ou 
+ * modificá-lo sob os termos da Licença Pública Geral GNU como 
+ * publicada pela Fundação do Software Livre (FSF); na versão 3 da 
+ * Licença, ou (a seu critério) qualquer versão posterior.
+ * 
+ * Este programa é distribuído na esperança de que possa ser útil, 
+ * mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO
+ * a qualquer MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a
+ * Licença Pública Geral GNU para mais detalhes.
+ * 
+ *
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
+ * com este programa. Se não, veja <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+/** 
+ * <p> 
+ * Ficha Catalográfica para Teses e Dissertações - IFG
+ * </p> 
+ * 
+ * 
+ * Contato: 
+ * 
+ * Este aplicativo utiliza o pacote PHP Pdf, que pode ser baixado a partir de 
+ * https://github.com/rospdf/pdf-php
+ *
+ * Este aplicativo utiliza o pacote PHP Mailer, que pode ser baixado a partir de 
+ * https://github.com/PHPMailer/PHPMailer
+ * 
+ * Este aplicativo utiliza a biblioteca de estilos do bootstrap v3 que pode ser obtido em
+ * http://getbootstrap.com/
+ * 
+ * Os arquivos associados ao quadro de ajuda estão disponíveis em
+ * http://www.icmc.usp.br/institucional/estrutura-administrativa/biblioteca/servicos/ficha
+ *  
+ * @author Maria Alice Soares de Castro - STI-ICMC (2017)
+ * @copyright Seção Técnica de Informática - STI/ICMC (2017)
+ * 
+ * Universidade de São Paulo
+ * Instituto de Ciências Matemáticas e de Computação (ICMC).
+ *
+ * @author Samuel da Silva dos Santos (2022)
+ * 
+ * Instituto Federal de Goiás - Campus Uruaçu
+ * Análise e Desenvolvimento de Sistemas.
+ */
+
+##########################################################################################
         require("conexao.php");
         if (isset($_GET['erro'])) { 
             if ($_GET['erro'] == "dadoserrado") { 
-                echo "alert('<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
           <strong>Dados Incorretos</strong> insira os dados novamente de forma correta!
           <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
           <span aria-hidden='true'>&times;</span>
           </button>
-        </div>');"; 
+        </div>"; 
             }
         }
         if (isset($_POST['cadastrar'])) {
@@ -21,12 +77,12 @@
         if ($senha1 == $senha2) {
           
 
-         $cadastro = $conexao->prepare("insert into `aluno` (`nome`, `senha`, `email`, `matricula`, `telefone`) values (:n, :s, :a, :b, :c)");
-          $cadastro = bindValue(":n", $nome);
-          $cadastro = bindValue(":s", $hashsenha);
-          $cadastro = bindValue(":a", $email);
-          $cadastro = bindValue(":b", $matricula);
-          $cadastro = bindValue(":c", $telefone);
+         $cadastro = $conexao->prepare("insert into `servidor` (`nome`, `senha`, `email`, `matricula`, `telefone`) values (:n, :s, :a, :b, :c)");
+          $cadastro->bindValue(":n", $nome);
+          $cadastro->bindValue(":s", $hashsenha);
+          $cadastro->bindValue(":a", $email);
+          $cadastro->bindValue(":b", $matricula);
+          $cadastro->bindValue(":c", $telefone);
           $cadastro->execute();
 
           header("location:index.html");
@@ -43,7 +99,7 @@
            <title></title>
            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         </head>
-        <body style="background-color:#BEC8E3;">		
+        <body style="background-color:#BEC8E3;">        
 
 
 
@@ -97,7 +153,7 @@
 
                         <div class="d-flex justify-content-center">
                             
-                          <input type="button"
+                          <input type="submit"
                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" name="cadastrar" value="cadastrar">
                         </div>
 
