@@ -62,7 +62,13 @@ $id_aluno = $_SESSION['user'];
     $lista2 = $conexao->prepare("select * from ficha where ficha.id = '$id'");
     $lista2->execute();
     $itens = $lista2->fetch(PDO::FETCH_OBJ);
-
+if (isset($_GET['erro'])) { 
+            if ($_GET['erro'] == "erro") { 
+                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+          <strong>Erro no formulário</strong> insira os dados novamente de forma correta!
+        </div>"; 
+            }
+        }
 
 // Verifica se foi entrado um nome no formulário
 // Se não houver valor para nome, apresenta o formulário para ser preenchido
@@ -84,9 +90,8 @@ if (!isset($_POST["Enviar"])) {
 
     <!-- Menu  --------------------------------- -->
 
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="menu.php">Menu</a>
+     <nav class="navbar navbar-expand-lg navbar-light bg-light table" style="width:100%;">
+          <a class="navbar-brand" href="menu_servidor.php">Menu</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -94,13 +99,16 @@ if (!isset($_POST["Enviar"])) {
             <ul class="navbar-nav">
               
             <li class="nav-item">
-                <a class="nav-link" href="#">Informações</a>
+                <a class="nav-link" href="Tutorial_fichacat_2011.pdf">Informações</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Alterar dados</a>
-            </li>                
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="ficha_usuario.php">Enviar nova ficha</a>
+                <a class="nav-link" href="ficha_usuario.php">Gerar ficha</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="historico.php">Histórico</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="logout.php">Sair</a>
@@ -108,7 +116,7 @@ if (!isset($_POST["Enviar"])) {
             
       </ul>
   </div>
-</nav></div>
+</nav>
 
 <!-- Formulário  --------------------------------- -->
     <br>
@@ -120,14 +128,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome*
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor1" value="<?php echo "$itens->n_autor1"; ?>" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor1" value="<?php echo "$itens->n_autor1" ; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome*
                 </label>
-                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_autor1" value="<?php echo "$itens->s_autor1;"; ?>" />
+                <input type="text" placeholder="Ex: Silva"class="form-control" name="sobrenome_autor1" value="<?php echo "$itens->s_autor1" ; ?>" />
             </div>
 
         </div>
@@ -139,14 +147,14 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     nome
                 </label>
-                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor2" value="<?php echo "$itens->n_autor2;"; ?>" />
+                <input type="text" placeholder="Ex: Fulano dos Santos" class="form-control" name="nome_autor2" value="<?php echo "$itens->n_autor2" ; ?>" />
             </div>
             <div class="form-group col-md-4">
 
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor2" value="<?php echo "$sobrenome_autor2"; ?>" />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_autor2" value='<?php echo "$itens->s_autor2" ; ?>' />
             </div>
 
         </div>
@@ -249,11 +257,21 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="<?php echo ""; ?>" id="defaultCheck1" name="doutorado">
+                <?php if ($itens->d_orientador == 1) {
+                    echo "<input class='form-check-input' name='doutorado' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='doutorado' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
                 <label class="form-check-label" for="defaultCheck1" >Doutor
                 </label>
                 <br>
-                <input class="form-check-input" type="checkbox" value="<?php echo ""; ?>" name="orientadora">
+                <?php if ($itens->g_orientador == 1) {
+                    echo "<input class='form-check-input' name='orientadora' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='orientadora' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
 
                 <label class="form-check-label" for="defaultCheck1" >
                     Orientadora
@@ -276,15 +294,25 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                     sobrenome
                 </label>
-                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori1" value=<?php echo "$itens->s_coorientador1"; ?> />
+                <input type="text" placeholder="Ex: Silva" class="form-control" name="sobrenome_coori1" value='<?php echo "$itens->s_coorientador1"; ?>' />
             </div>
             <div class="form-group col-md-4"  align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" vvalue="<?php echo ""; ?>" id="defaultCheck1" name="doutorado1">
+                <?php if ($itens->d_coorientador1 == 1) {
+                    echo "<input class='form-check-input' name='doutorado1' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='doutorado1' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
                 <label class="form-check-label" for="defaultCheck1">
                     Doutor
                 </label><br>
-                <input class="form-check-input" type="checkbox" value="<?php echo ""; ?>" id="defaultCheck1" name="coorientadora1">
+                <?php if ($itens->g_coorientador1 == 1) {
+                    echo "<input class='form-check-input' name='coorientadora1' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='coorientadora1' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
 
                 <label class="form-check-label" for="defaultCheck1">
                     Orientadora
@@ -310,11 +338,21 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="<?php echo "";?>" name="doutorado2">
+                <?php if ($itens->d_coorientador2 == 1) {
+                    echo "<input class='form-check-input' name='doutorado2' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='doutorado2' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
                 <label class="form-check-label" for="defaultCheck1">
                     Doutor
                 </label><br>
-                <input class="form-check-input" type="checkbox" value= "<?php echo ""; ?>" id="defaultCheck1" name="coorientadora2">
+                <?php if ($itens->g_coorientador2 == 1) {
+                    echo "<input class='form-check-input' name='coorientadora2' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='coorientadora2' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
 
                 <label class="form-check-label" for="defaultCheck1">
                     Orientadora
@@ -332,44 +370,44 @@ if (!isset($_POST["Enviar"])) {
                 <?php if ($itens->siglas == 1) {
                     echo "<input class='form-check-input' name='siglas' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='siglas' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='siglas' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
               
               <label class="form-check-label" for="defaultCheck1">Siglas</label>
         </div>
         <div class="form-check">
-          <?php if ($mapa == 1) {
+          <?php if ($itens->mapas == 1) {
                     echo "<input class='form-check-input' name='mapas' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='mapas' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='mapas' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
           <label class="form-check-label" for="defaultCheck1">Mapas</label>
         </div>
         <div class="form-check">
-            <?php if ($fotografias == 1) {
+            <?php if ($itens->fotografias == 1) {
                     echo "<input class='form-check-input' name='fotografias' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='fotografias' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='fotografias' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Fotografias</label>
         </div>
         <div class="form-check">
-            <?php if ($abreviaturas == 1) {
+            <?php if ($itens->abreviaturas == 1) {
                     echo "<input class='form-check-input' name='abreviaturas' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='abreviaturas' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='abreviaturas' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Abreviaturas</label>
         </div>
         <div class="form-check">
-            <?php if ($simbolos == 1) {
+            <?php if ($itens->simbolos == 1) {
                     echo "<input class='form-check-input' name='simbolos' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='simbolos' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='simbolos' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Símbolos</label>
@@ -378,46 +416,46 @@ if (!isset($_POST["Enviar"])) {
         <div>
             <div>
             <div class="form-check">
-            <?php if ($graficos == 1) {
+            <?php if ($itens->graficos == 1) {
                     echo "<input class='form-check-input' name='graficos' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='graficos' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='graficos' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Gráfico</label>
         </div>
         <div class="form-check">
-            <?php if ($tabelas == 1) {
+            <?php if ($itens->tabelas == 1) {
                     echo "<input class='form-check-input' name='tabelas' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='tabelas' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='tabelas' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Tabelas</label>
         </div>
         <div class="form-check">
-            <?php if ($algoritmos == 1) {
+            <?php if ($itens->algoritmos == 1) {
                     echo "<input class='form-check-input' name='algoritmos' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='algoritmos' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='algoritmos' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Algoritmos</label>
         </div>
         <div class="form-check">
-            <?php if ($figuras == 1) {
+            <?php if ($itens->lista_figuras == 1) {
                     echo "<input class='form-check-input' name='figuras' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='figuras' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='figuras' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Lista de Figuras</label>
         </div>
         <div class="form-check">
-            <?php if ($lista_tabela == 1) {
+            <?php if ($itens->lista_tabelas == 1) {
                     echo "<input class='form-check-input' name='lista_tabelas' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
-                    echo "<input class='form-check-input' name='lista_tabelas' type='checkbox' value='' id='defaultCheck1'>";
+                    echo "<input class='form-check-input' name='lista_tabelas' type='checkbox' value='1' id='defaultCheck1'>";
                 }
                  ?>
             <label class="form-check-label" for="defaultCheck1">Lista de Tabelas</label>
@@ -427,44 +465,53 @@ if (!isset($_POST["Enviar"])) {
 
     </div>
     <div class="form-group col-md-4" align="left">
-        <br>
-        <label class="form-check-label" for="exampleRadios1">Ilustrações: </label><br>
+        <br><br><br>
+        <label class="form-check-label" for="exampleRadios1">Possui Ilustrações: </label>
         <div class="form-check form-check-inline">
+            <?php if ($itens->ilustracoes == 1) {
+                    echo "<input class='form-check-input' name='ilustracao' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='ilustracao' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
             
-            <input class="form-check-input" type="radio" name="ilustracao" value=<?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio" value=<?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Não</label>
             
     </div>
     <br><br>
-    <label class="form-check-label" for="exampleRadios1">Bibliografia: </label><br>
+    <label class="form-check-label" for="exampleRadios1">Possui Bibliografia: </label>
     <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="bibliografia" value="1" <?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio"  <?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Não</label>
+            <?php if ($itens->bibliografia == 1) {
+                    echo "<input class='form-check-input' name='bibliografia' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='bibliografia' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
+            
             
     </div>
         <br><br>
-        <label class="form-check-label" for="exampleRadios1">Anexos: </label> <br>  
+        <label class="form-check-label" for="exampleRadios1">Possui Anexos: </label>  
         <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="anexo"  value=<?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio" value=<?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Não</label>
+            <?php if ($itens->anexos == 1) {
+                    echo "<input class='form-check-input' name='anexo' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='anexo' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
             
     </div>
      <br><br>
-     <label class="form-check-label" for="exampleRadios1">Apêndice: </label><br>
+     <label class="form-check-label" for="exampleRadios1">Possui Apêndice: </label>
     <div class="form-check form-check-inline">
             
-            <input class="form-check-input" type="radio" name="apendice" value="1" value=<?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Sim</label>
-            <input class="form-check-input" type="radio" value=<?php echo ""; ?>>
-            <label class="form-check-label" for="exampleRadios1">Não</label>
+            <?php if ($itens->apendice == 1) {
+                    echo "<input class='form-check-input' name='apendice' type='checkbox' value='1' id='defaultCheck1' checked>";
+                }else{
+                    echo "<input class='form-check-input' name='apendice' type='checkbox' value='1' id='defaultCheck1'>";
+                }
+                 ?>
             
     </div>
 
@@ -498,21 +545,21 @@ if (!isset($_POST["Enviar"])) {
                 <label for="exampleInput">
                      (min. 1, max. 5)
                 </label>
-                <input type="text" name="assunto1" placeholder="Ex: Programação procedural" class="form-control" id="exampleInputEmail1" value="<?php echo "$assunto1"; ?>" />
+                <input type="text" name="assunto1" placeholder="Ex: Programação procedural" class="form-control" id="exampleInputEmail1" value="<?php echo "$itens->assunto1"; ?>" />
             </div>
             <div class="form-group col-md-12">
-                <input type="text" name="assunto2" placeholder="Ex: Engenharia de alimentos" class="form-control" id="exampleInputEmail1" value="<?php echo "$assunto2"; ?>"/>
+                <input type="text" name="assunto2" placeholder="Ex: Engenharia de alimentos" class="form-control" id="exampleInputEmail1" value="<?php echo "$itens->assunto2"; ?>"/>
             </div>
             <div class="form-group col-md-12">
-                <input type="text" name="assunto3" placeholder="Ex: Química industrial" class="form-control" id="exampleInputEmail1" value="<?php echo "$assunto3"; ?>" />
+                <input type="text" name="assunto3" placeholder="Ex: Química industrial" class="form-control" id="exampleInputEmail1" value="<?php echo "$itens->assunto3"; ?>" />
             </div>
             
             <div class="form-group col-md-12">
-                <input type="text" name="assunto4" placeholder="Ex: Desenvolvimento regional" class="form-control" id="exampleInputEmail1" value="<?php echo "$assunto4"; ?>" />
+                <input type="text" name="assunto4" placeholder="Ex: Desenvolvimento regional" class="form-control" id="exampleInputEmail1" value="<?php echo "$itens->assunto4"; ?>" />
             </div>
 
             <div class="form-group col-md-12">
-                <input type="text" name="assunto5" placeholder="Ex: Adaptação social" class="form-control" id="exampleInputEmail1" value="<?php echo "$assunto5"; ?>" />
+                <input type="text" name="assunto5" placeholder="Ex: Adaptação social" class="form-control" id="exampleInputEmail1" value="<?php echo "$itens->assunto5"; ?>" />
             </div>
 
         </div>
@@ -546,8 +593,8 @@ if (!isset($_POST["Enviar"])) {
     $subtitulo = ($_POST["subtitulo"]);
     $cutter = $_POST["cutter"];
 
-    $trabalho = ($_POST["trabalho"]);  // tese / dissertação
-    $programa = ($_POST["programa"]);  // cursos ...
+    $trabalho = ($_POST["trabalho"]); // tese / dissertação
+    $programa = ($_POST["programa"]); // cursos ...
     $nome_ori = ($_POST["nome_ori"]); // nome do orientador
     $sobrenome_ori = ($_POST["sobrenome_ori"]); // sobrenome do orientador
 
@@ -557,11 +604,13 @@ if (!isset($_POST["Enviar"])) {
     $nome_coori2 = ($_POST["nome_coori2"]); // nome do coorientador
     $sobrenome_coori2 = ($_POST["sobrenome_coori2"]); // sobrenome do coorientador
 
-    $orientadora = isset($_POST["orientadora"]) ? "orientadora" : "orientador";
-    $coorientadora1 = isset($_POST["coorientadora1"]) ? "coorientadora" : "coorientador";
-    $coorientadora1 = isset($_POST["coorientadora2"]) ? "coorientadora" : "coorientador";
-    //if (!empty($_POST["orientadora"]))
-    //   $orientadora = $_POST["orientadora"]; // se sexo feminino, vale "a"
+    $orientadora = isset($_POST["orientadora"]) ? 1 : 0;
+    $coorientadora1 = isset($_POST["coorientadora1"]) ? 1 : 0;
+    $coorientadora2 = isset($_POST["coorientadora2"]) ? 1 : 0;
+
+    $doutorado = !empty($_POST["doutorado"]) ? 1 : 0;//possui doutorado
+    $doutorado1 = !empty($_POST["doutorado1"]) ? 1 : 0;//possui doutorado
+    $doutorado2 = !empty($_POST["doutorado2"]) ? 1 : 0;//possui doutorado
     
     $ano = $_POST["ano"];
     $pags = $_POST["pags"];
@@ -572,15 +621,9 @@ if (!isset($_POST["Enviar"])) {
     $assunto3 = ($_POST["assunto3"]);
     $assunto4 = ($_POST["assunto4"]);
     $assunto5 = ($_POST["assunto5"]);
+
     $cdd = ($_POST["CDD"]);
-    // monta informações da ficha catalográfica
-    if  (empty($nome_autor3))// caso tenha 3º autor 
-        if(empty($nome_autor2))// caso tenha 2º autor
-            ;
-        else
-            ;
-    else
-        ;
+
 
     $sigla = !empty($_POST["siglas"]) ? 1 : 0;
     $mapa = !empty($_POST["mapas"]) ? 1 : 0;
@@ -597,6 +640,7 @@ if (!isset($_POST["Enviar"])) {
     $anexo = !empty($_POST["anexo"]) ? 1 : 0;
     $apendice = !empty($_POST["apendice"]) ? 1 : 0;
     
+
 try {
     $lista = $conexao->prepare("update `ficha` set
     `n_autor1` = :value_1,
@@ -608,7 +652,6 @@ try {
     `titulo` = :value_7,
     `sub_titulo` = :value_8,
     `codigo` = :value_9,
-    `cdd` = :value_41,
     `trabalho` = :value_10,
     `curso` = :value_11,
     `n_orientador` = :value_12,
@@ -639,7 +682,14 @@ try {
     `assunto3` = :value_37,
     `assunto4` = :value_38,
     `assunto5` = :value_39,
-    `status` = :value_40
+    `status` = :value_40,
+    `g_orientador` = :value_42,
+    `cdd` = :value_41,
+    `d_orientador` = :value_43,
+    `g_coorientador1` = :value_44,
+    `d_coorientador1` = :value_45,
+    `g_coorientador2` = :value_46,
+    `d_coorientador2` = :value_47
 where ficha.id = '$id' ");
      
     $lista->bindValue(':value_1', $nome_autor1);
@@ -684,14 +734,18 @@ where ficha.id = '$id' ");
     $status = 0;
     $lista->bindValue(':value_40', $status);
     $lista->bindValue(':value_41', $cdd);
-
+    $lista->bindValue(':value_42', $orientadora);
+    $lista->bindValue(':value_43', $doutorado);
+    $lista->bindValue(':value_44', $coorientadora1);
+    $lista->bindValue(':value_45', $doutorado1);
+    $lista->bindValue(':value_46', $coorientadora2);
+    $lista->bindValue(':value_47', $doutorado2);
     $lista->execute();
     
-    header("location:menu.php");
+    header("location:menu_servidor.php");
 
 } catch (Exception $e) {
-    var_dump($e);
-echo "ERRO getMessage($e)";
+    header("location:alterar_servidor.php?erro=erro");
 }
 
 

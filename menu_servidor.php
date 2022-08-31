@@ -91,7 +91,7 @@
                 <a class="nav-link" href="#">Alterar dados</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ficha_usuario.php">Gerar ficha</a>
+                <a class="nav-link" href="ficha_servidor.php">Gerar ficha</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="historico.php">Histórico</a>

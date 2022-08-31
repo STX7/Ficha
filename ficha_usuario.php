@@ -60,6 +60,13 @@ session_start();
 
 // Verifica se foi entrado um nome no formulário
 // Se não houver valor para nome, apresenta o formulário para ser preenchido
+if (isset($_GET['erro'])) { 
+            if ($_GET['erro'] == "erro") { 
+                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+          <strong>Erro no formulário</strong> insira os dados novamente de forma correta!
+        </div>"; 
+            }
+        }
 if (!isset($_POST["Enviar"])) { 
 
 ?><!DOCTYPE html>
@@ -475,19 +482,8 @@ if (!isset($_POST["Enviar"])) {
 
     date_default_timezone_set('America/Sao_Paulo');
 
-    $id_aluno = $_SESSION['user'];
-    $nome_autor1 = ($_POST["nome_autor1"]);
-    $sobrenome_autor1 = ($_POST["sobrenome_autor1"]);
-    $nome_autor2 = ($_POST["nome_autor2"]);
-    $sobrenome_autor2 = ($_POST["sobrenome_autor2"]);
-    $nome_autor3 = ($_POST["nome_autor3"]);
-    $sobrenome_autor3 = ($_POST["sobrenome_autor3"]);
 
-    $titulo = ($_POST["titulo"]);
-    $subtitulo = ($_POST["subtitulo"]);
-    $cutter = $_POST["cutter"];
-
-
+    $id = $_SESSION['user'];
     if ($_POST["programa"] == "em Bacharelado em Engenharia Cívil") {
         $cdd = "624";
     }
@@ -498,72 +494,66 @@ if (!isset($_POST["Enviar"])) {
         $cdd = "004";
     }
 
-    $trabalho = ($_POST["trabalho"]); // tese / dissertação
-    $programa = ($_POST["programa"]); // cursos ...
+
+    $orientadora = isset($_POST["orientadora"]) ? 1 : 0;
+    $coorientadora1 = isset($_POST["coorientadora1"]) ? 1 : 0;
+    $coorientadora2 = isset($_POST["coorientadora2"]) ? 1 : 0;
+
+    $doutorado = !empty($_POST["doutorado"]) ? 1 : 0;//possui doutorado
+    $doutorado1 = !empty($_POST["doutorado1"]) ? 1 : 0;//possui doutorado
+    $doutorado2 = !empty($_POST["doutorado2"]) ? 1 : 0;//possui doutorado
+
+    $id_aluno = $_SESSION['user'];
+
+    $nome_autor1 = filter_input(INPUT_POST, 'nome_autor1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_autor1 = filter_input(INPUT_POST, 'sobrenome_autor1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $nome_autor2 = filter_input(INPUT_POST, 'nome_autor2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_autor2 = filter_input(INPUT_POST, 'sobrenome_autor2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $nome_autor3 = filter_input(INPUT_POST, 'nome_autor3', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_autor3 = filter_input(INPUT_POST, 'sobrenome_autor3', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
+    $subtitulo = filter_input(INPUT_POST, 'subtitulo', FILTER_SANITIZE_SPECIAL_CHARS);
+    $cutter = filter_input(INPUT_POST, 'cutter', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $trabalho = ($_POST["trabalho"]);  // tese / dissertação
+    $programa = ($_POST["programa"]);  // cursos ...
     $nome_ori = ($_POST["nome_ori"]); // nome do orientador
     $sobrenome_ori = ($_POST["sobrenome_ori"]); // sobrenome do orientador
 
-    $nome_coori1 = ($_POST["nome_coori1"]); // nome do coorientador
-    $sobrenome_coori1 = ($_POST["sobrenome_coori1"]); // sobrenome do coorientador
+    $nome_coori1 = filter_input(INPUT_POST, 'nome_coori1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_coori1 = filter_input(INPUT_POST, 'sobrenome_coori1', FILTER_SANITIZE_SPECIAL_CHARS);
     
-    $nome_coori2 = ($_POST["nome_coori2"]); // nome do coorientador
-    $sobrenome_coori2 = ($_POST["sobrenome_coori2"]); // sobrenome do coorientador
-
-    $orientadora = isset($_POST["orientadora"]) ? "orientadora" : "orientador";
-    $coorientadora1 = isset($_POST["coorientadora1"]) ? "coorientadora" : "coorientador";
-    $coorientadora1 = isset($_POST["coorientadora2"]) ? "coorientadora" : "coorientador";
-    //if (!empty($_POST["orientadora"]))
-    //   $orientadora = $_POST["orientadora"]; // se sexo feminino, vale "a"
+    $nome_coori2 = filter_input(INPUT_POST, 'nome_coori2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $sobrenome_coori2 = filter_input(INPUT_POST, 'sobrenome_coori2', FILTER_SANITIZE_SPECIAL_CHARS);
     
-    $ano = $_POST["ano"];
-    $pags = $_POST["pags"];
-    $pags_roma = $_POST["pags_roma"];
+    $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
+    $pags = filter_input(INPUT_POST, 'pags', FILTER_SANITIZE_NUMBER_INT);
+    $pags_roma = filter_input(INPUT_POST, 'pags_roma', FILTER_SANITIZE_SPECIAL_CHARS);
     
-    $assunto1 = ($_POST["assunto1"]);
-    $assunto2 = ($_POST["assunto2"]);
-    $assunto3 = ($_POST["assunto3"]);
-    $assunto4 = ($_POST["assunto4"]);
-    $assunto5 = ($_POST["assunto5"]);
-
-    // monta informações da ficha catalográfica
-    if  (empty($nome_autor3))// caso tenha 3º autor 
-        if(empty($nome_autor2))// caso tenha 2º autor
-            ;
-        else
-            ;
-    else
-        ;
+    $assunto1 = filter_input(INPUT_POST, 'assunto1', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto2 = filter_input(INPUT_POST, 'assunto2', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto3 = filter_input(INPUT_POST, 'assunto3', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto4 = filter_input(INPUT_POST, 'assunto4', FILTER_SANITIZE_SPECIAL_CHARS);
+    $assunto5 = filter_input(INPUT_POST, 'assunto5', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $sigla = !empty($_POST["siglas"]) ? 1 : 0;
-
     $mapa = !empty($_POST["mapas"]) ? 1 : 0;
-
     $fotografias = !empty( $_POST["fotografias"]) ? 1 : 0;
-
     $abreviaturas = !empty($_POST["abreviaturas"]) ? 1 : 0;
-
     $simbolos = !empty($_POST["simbolos"]) ? 1 : 0;
-
     $graficos = !empty($_POST["graficos"]) ? 1 : 0;
-
     $tabelas = !empty($_POST["tabelas"]) ? 1 : 0;
-
     $algoritmos = !empty($_POST["algoritmos"]) ? 1 : 0;
-
     $figuras = !empty($_POST["figuras"]) ? 1 : 0;
-
     $lista_tabela = !empty($_POST["lista_tabelas"]) ? 1 : 0;
-
     $ilustracao = !empty($_POST["ilustracao"]) ? 1 : 0;
-
-    $bibliografia = !empty($_POST["bibliografia"]) ? 1 : 0;
-        
+    $bibliografia = !empty($_POST["bibliografia"]) ? 1 : 0; 
     $anexo = !empty($_POST["anexo"]) ? 1 : 0;
-
     $apendice = !empty($_POST["apendice"]) ? 1 : 0;
  
 try {
-    $lista = $conexao->prepare("insert into ficha (`n_autor1`, `s_autor1`, `n_autor2`, `s_autor2`, `n_autor3`, `s_autor3`, `titulo`, `sub_titulo`, `codigo`, `cdd`, `trabalho`, `curso`, `n_orientador`, `s_orientador`, `n_coorientador1`, `s_coorientador1`, `n_coorientador2`, `s_coorientador2`, `ano`, `n_pags`, `n_pags_rom`, `siglas`, `mapas`, `fotografias`, `abreviaturas`, `simbolos`, `graficos`, `tabelas`, `algoritmos`, `lista_figuras`, `lista_tabelas`, `ilustracoes`, `bibliografia`, `anexos`, `apendice`, `assunto1`, `assunto2`, `assunto3`, `assunto4`, `assunto5`, `id_usuario`, `status`) values(:a, :b, :c, :d, :e, :f, :g, :h, :i, :ap, :j, :k, :l, :m, :n, :o, :p, :q, :r, :s, :t, :u, :v, :w, :x, :y, :z, :aa, :ab, :ac, :ad, :ae, :af, :ag, :ah, :ai, :aj, :ak, :al, :am, :an, :ao)");
+    $lista = $conexao->prepare("insert into ficha (n_autor1, s_autor1, n_autor2, s_autor2, n_autor3, s_autor3, titulo, sub_titulo, codigo, trabalho, curso, n_orientador, s_orientador, n_coorientador1, s_coorientador1, n_coorientador2, s_coorientador2, ano, n_pags, n_pags_rom, siglas, mapas, fotografias, abreviaturas, simbolos, graficos, tabelas, algoritmos, lista_figuras, lista_tabelas, ilustracoes, bibliografia, anexos, apendice, assunto1, assunto2, assunto3, assunto4, assunto5, id_usuario, status, g_orientador, d_orientador, g_coorientador1, d_coorientador1, g_coorientador2, d_coorientador2) values(:a, :b, :c, :d, :e, :f, :g, :h, :i, :j, :k, :l, :m, :n, :o, :p, :q, :r, :s, :t, :u, :v, :w, :x, :y, :z, :aa, :ab, :ac, :ad, :ae, :af, :ag, :ah, :ai, :aj, :ak, :al, :am, :an, :ao, :ap, :aq, :ar, :as, :at, :au)");
     $lista->bindValue(':a', $nome_autor1);
     $lista->bindValue(':b', $sobrenome_autor1);
     $lista->bindValue(':c', $nome_autor2);
@@ -573,7 +563,6 @@ try {
     $lista->bindValue(':g', $titulo);
     $lista->bindValue(':h', $subtitulo);
     $lista->bindValue(':i', $cutter);
-    $lista->bindValue(':ap', $cdd);
     $lista->bindValue(':j', $trabalho);
     $lista->bindValue(':k', $programa);
     $lista->bindValue(':l', $nome_ori);
@@ -604,16 +593,24 @@ try {
     $lista->bindValue(':ak', $assunto3);
     $lista->bindValue(':al', $assunto4);
     $lista->bindValue(':am', $assunto5);
-    $lista->bindValue(':an', $id_aluno);
+    $lista->bindValue(':an', $id);
     $status = 0;
     $lista->bindValue(':ao', $status);
+    $lista->bindValue(':ap', $orientadora);
+    $lista->bindValue(':aq', $doutorado);
+    $lista->bindValue(':ar', $coorientadora1);
+    $lista->bindValue(':as', $doutorado1);
+    $lista->bindValue(':at', $coorientadora2);
+    $lista->bindValue(':au', $doutorado2);
+
 
     $lista->execute();
-    
     header("location:menu.php");
 
 } catch (Exception $e) {
-    echo "Erro no sistema, falha $e->getMessage()";
+
+    header("location:ficha_usuario.php?erro=erro");
+    
 }
 
 

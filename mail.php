@@ -91,6 +91,7 @@ try
     $titulo = $itens->titulo;
     $subtitulo = $itens->sub_titulo;
     $cutter = $itens->codigo;
+    $xyz = $itens->cdd;
     $trabalho = $itens->trabalho;
     $programa = $itens->curso;
     $nome_ori = $itens->n_orientador;
@@ -186,8 +187,6 @@ try
 
 
     //aplica código CDD
-    
-    $xyz = filter_input(INPUT_POST, 'CDD', FILTER_SANITIZE_SPECIAL_CHARS);
 
     if ($trabalho == "Tese")
         $texto .= " (Doutorado";
