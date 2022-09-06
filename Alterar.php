@@ -57,6 +57,7 @@
 ##########################################################################################
 require("conexao.php");
 session_start();
+$conexao = conectar();
 $id_aluno = $_SESSION['user'];
     $id = $_GET['id'];
     $lista2 = $conexao->prepare("select * from ficha where ficha.id = '$id'");

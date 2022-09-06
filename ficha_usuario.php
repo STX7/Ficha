@@ -56,6 +56,7 @@
 
 ##########################################################################################
 require("conexao.php");
+$conexao = conectar();
 session_start();
 
 // Verifica se foi entrado um nome no formulário
@@ -608,8 +609,8 @@ try {
     header("location:menu.php");
 
 } catch (Exception $e) {
-
-    header("location:ficha_usuario.php?erro=erro");
+echo "$e";
+    //header("location:ficha_usuario.php?erro=erro");
     
 }
 

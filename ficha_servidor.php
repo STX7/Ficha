@@ -57,7 +57,7 @@
 ##########################################################################################
 require("conexao.php");
 session_start();
-
+$conexao = conectar();
 // Verifica se foi entrado um nome no formulário
 // Se não houver valor para nome, apresenta o formulário para ser preenchido
 if (!isset($_POST["Enviar"])) { 

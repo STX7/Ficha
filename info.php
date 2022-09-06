@@ -57,9 +57,10 @@
 ##########################################################################################
 	session_start();
 	require("conexao.php");
+    $conexao = conectar();
 	$id = $_SESSION['user'];
     $id_usuario = $_GET['id'];
-    $lista = $conexao->prepare("select * from aluno where :id = aluno.id");
+    $lista = $conexao->prepare("select * from usuarios where :id = usuarios.id");
     $lista->bindValue(':id', $id_usuario);
     $lista->execute();
     $itens = $lista->fetch(PDO::FETCH_OBJ);
@@ -137,15 +138,7 @@
                             <label class="text-secondary"><?php echo "$itens->email"; ?></label>
                           
                         </div>
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="form3Example3cg">Telefone</label><br>
-                            <label class="text-secondary"><?php echo "$itens->telefone"; ?></label>
-
-                        <div class="d-flex justify-content-center">
-                            
-
-                    </div>
-                  </div>
+                        
                 </div>
               </div>
             </div>

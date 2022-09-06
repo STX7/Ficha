@@ -57,6 +57,7 @@
 ##########################################################################################
     	session_start();
     	require("conexao.php");
+        $conexao = conectar();
     	$id = $_SESSION['user'];
 
     ?>
@@ -135,9 +136,6 @@
           </td>
           <td>
             <a href='excluir.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
-          </td>
-          <td>
-            <a href=''><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
           </td>
         </tr>";
 

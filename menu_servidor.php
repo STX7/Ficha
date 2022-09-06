@@ -57,6 +57,7 @@
 ##########################################################################################
 	session_start();
 	require("conexao.php");
+    $conexao = conectar();
 	$id = $_SESSION['user'];
 
 ?>

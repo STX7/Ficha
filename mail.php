@@ -62,6 +62,7 @@ require 'vendor/autoload.php';
 //require('pdf-php/src/Cezpdf.php');
 
 require 'conexao.php';
+$conexao = conectar();
 
 session_start();
 date_default_timezone_set('America/Sao_Paulo');
