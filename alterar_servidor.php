@@ -57,8 +57,10 @@
 ##########################################################################################
 require("conexao.php");
 session_start();
-$id_aluno = $_SESSION['user'];
+$id_aluno = $_SESSION['servidor'];
     $id = $_GET['id'];
+    
+    $conexao = conectar();
     $lista2 = $conexao->prepare("select * from ficha where ficha.id = '$id'");
     $lista2->execute();
     $itens = $lista2->fetch(PDO::FETCH_OBJ);
@@ -257,14 +259,12 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <?php if ($itens->d_orientador == 1) {
-                    echo "<input class='form-check-input' name='doutorado' type='checkbox' value='1' id='defaultCheck1' checked>";
-                }else{
-                    echo "<input class='form-check-input' name='doutorado' type='checkbox' value='1' id='defaultCheck1'>";
-                }
-                 ?>
-                <label class="form-check-label" for="defaultCheck1" >Doutor
-                </label>
+                <select class="custom-select" name="doutorado">
+                    <option>Escolha a gradução</option>
+                    <option value="Mestrado" <?php echo $itens->d_orientador == "mer" ?  "selected" : "" ?>>Mestre</option>
+                    <option value="Doutorado" <?php echo $itens->d_orientador == "dr" ?  "selected" : "" ?>>Doutor</option>
+                </select>
+                 
                 <br>
                 <?php if ($itens->g_orientador == 1) {
                     echo "<input class='form-check-input' name='orientadora' type='checkbox' value='1' id='defaultCheck1' checked>";
@@ -298,15 +298,12 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4"  align="left" style="left: 20px;">
                 <br>
-                <?php if ($itens->d_coorientador1 == 1) {
-                    echo "<input class='form-check-input' name='doutorado1' type='checkbox' value='1' id='defaultCheck1' checked>";
-                }else{
-                    echo "<input class='form-check-input' name='doutorado1' type='checkbox' value='1' id='defaultCheck1'>";
-                }
-                 ?>
-                <label class="form-check-label" for="defaultCheck1">
-                    Doutor
-                </label><br>
+                <select class="custom-select" name="doutorado1">
+                    <option>Escolha a gradução</option>
+                    <option value="Mestrado" <?php echo $itens->d_coorientador1 == "mer" ?  "selected" : "" ?>>Mestre</option>
+                    <option value="Doutorado" <?php echo $itens->d_coorientador1 == "dr" ?  "selected" : "" ?>>Doutor</option>
+                </select>
+                <br>
                 <?php if ($itens->g_coorientador1 == 1) {
                     echo "<input class='form-check-input' name='coorientadora1' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
@@ -315,7 +312,7 @@ if (!isset($_POST["Enviar"])) {
                  ?>
 
                 <label class="form-check-label" for="defaultCheck1">
-                    Orientadora
+                    Coorientadora
                 </label>
             </div>
         </div>
@@ -338,15 +335,12 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <?php if ($itens->d_coorientador2 == 1) {
-                    echo "<input class='form-check-input' name='doutorado2' type='checkbox' value='1' id='defaultCheck1' checked>";
-                }else{
-                    echo "<input class='form-check-input' name='doutorado2' type='checkbox' value='1' id='defaultCheck1'>";
-                }
-                 ?>
-                <label class="form-check-label" for="defaultCheck1">
-                    Doutor
-                </label><br>
+                <select class="custom-select" name="doutorado2">
+                    <option>Escolha a gradução</option>
+                    <option value="Mestrado" <?php echo $itens->d_coorientador2 == "mer" ?  "selected" : "" ?>>Mestre</option>
+                    <option value="Doutorado" <?php echo $itens->d_coorientador2 == "dr" ?  "selected" : "" ?>>Doutor</option>
+                </select>
+                <br>
                 <?php if ($itens->g_coorientador2 == 1) {
                     echo "<input class='form-check-input' name='coorientadora2' type='checkbox' value='1' id='defaultCheck1' checked>";
                 }else{
@@ -355,7 +349,7 @@ if (!isset($_POST["Enviar"])) {
                  ?>
 
                 <label class="form-check-label" for="defaultCheck1">
-                    Orientadora
+                    Coorientadora
                 </label>
             </div>
         </div>
@@ -564,9 +558,15 @@ if (!isset($_POST["Enviar"])) {
 
         </div>
         <br>
-
+        <select class="custom-select" name="status">
+            <option selected>Status</option>
+            <option value="1" <?php echo $itens->status == "1" ?  "selected" : "" ?>>Aprovado</option>
+            <option value="2" <?php echo $itens->status == "2" ?  "selected" : "" ?>>Correção</option>
+        </select>
     <input class="btn btn-success btn-lg" type="submit" name="Enviar" value="Enviar" placeholder="Enviar">
-    <input class="btn btn-secondary btn-lg" type="reset" value="Resetar" placeholder="Resetar">   <br><br>  
+    <input class="btn btn-secondary btn-lg" type="reset" value="Resetar" placeholder="Resetar">
+
+    <br><br>  
 </form>
 </div>
 
@@ -581,7 +581,7 @@ if (!isset($_POST["Enviar"])) {
 
     date_default_timezone_set('America/Sao_Paulo');
 
-    $id_aluno = $_SESSION['user'];
+    $id_aluno = $_SESSION['servidor'];
     $nome_autor1 = ($_POST["nome_autor1"]);
     $sobrenome_autor1 = ($_POST["sobrenome_autor1"]);
     $nome_autor2 = ($_POST["nome_autor2"]);
@@ -608,9 +608,29 @@ if (!isset($_POST["Enviar"])) {
     $coorientadora1 = isset($_POST["coorientadora1"]) ? 1 : 0;
     $coorientadora2 = isset($_POST["coorientadora2"]) ? 1 : 0;
 
-    $doutorado = !empty($_POST["doutorado"]) ? 1 : 0;//possui doutorado
-    $doutorado1 = !empty($_POST["doutorado1"]) ? 1 : 0;//possui doutorado
-    $doutorado2 = !empty($_POST["doutorado2"]) ? 1 : 0;//possui doutorado
+    if (($_POST["doutorado"]) == "dr"){
+        $doutorado = "dr";
+    }elseif(($_POST["doutorado"]) == "mer"){
+        $doutorado = "mer";
+    }else{
+        $doutorado = null;
+    }
+
+    if (($_POST["doutorado1"]) == "dr"){
+        $doutorado1 = "dr";
+    }elseif(($_POST["doutorado1"]) == "mer"){
+        $doutorado1 = "mer";
+    }else{
+        $doutorado1 = null;
+    }
+
+    if (($_POST["doutorado2"]) == "dr"){
+        $doutorado2 = "dr";
+    }elseif(($_POST["doutorado2"]) == "mer"){
+        $doutorado2 = "mer";
+    }else{
+        $doutorado2 = null;
+    }
     
     $ano = $_POST["ano"];
     $pags = $_POST["pags"];
@@ -640,7 +660,7 @@ if (!isset($_POST["Enviar"])) {
     $anexo = !empty($_POST["anexo"]) ? 1 : 0;
     $apendice = !empty($_POST["apendice"]) ? 1 : 0;
     
-
+    $status = ($_POST["status"]);
 try {
     $lista = $conexao->prepare("update `ficha` set
     `n_autor1` = :value_1,
@@ -731,7 +751,6 @@ where ficha.id = '$id' ");
     $lista->bindValue(':value_37', $assunto3);
     $lista->bindValue(':value_38', $assunto4);
     $lista->bindValue(':value_39', $assunto5);
-    $status = 0;
     $lista->bindValue(':value_40', $status);
     $lista->bindValue(':value_41', $cdd);
     $lista->bindValue(':value_42', $orientadora);
@@ -745,7 +764,8 @@ where ficha.id = '$id' ");
     header("location:menu_servidor.php");
 
 } catch (Exception $e) {
-    header("location:alterar_servidor.php?erro=erro");
+    die($e->getMessage());
+    header("location:alterar_servidor.php?id=$id&erro=erro");
 }
 
 

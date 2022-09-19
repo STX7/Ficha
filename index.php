@@ -78,7 +78,7 @@ if (isset($_GET['erro'])) {
 
 if (isset($_POST['login'])) {
 
-	$user = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+	$user = filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW);
 	$senha = $_POST['senha'];
 
 	if (!$user || !$senha) {
@@ -108,13 +108,14 @@ if (isset($_POST['login'])) {
 				$atualiza = $conexao->prepare("select id from usuarios where usuarios.matricula = :matricula");
 				$atualiza->bindValue(":matricula",$data[0]["cn"][0]);
 				$atualiza->execute();
-				if ($atualiza) {
+				if ($atualiza->rowCount()>0) {
 					$id = $atualiza->fetch(PDO::FETCH_OBJ)->id;
 					$receba = atualiza($data, $id);
+					
 				}else{
 					$receba = busca($data);					
 				}
-
+				
 
 				if ($receba['tipo'] == "servidor") {
 					$_SESSION['servidor'] = $receba['id'];
@@ -129,7 +130,7 @@ if (isset($_POST['login'])) {
 				header("Location: index.php?erro=usererrado");
 			}
 		}else{
-			ldap_close($ldapconn);
+			//ldap_close($ldapconn);
 		}
 	}
 	ldap_close($ldapconn);

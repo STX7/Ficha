@@ -250,9 +250,11 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="Dr. " id="defaultCheck1" name="doutorado">
-                <label class="form-check-label" for="defaultCheck1" >Doutor
-                </label>
+                <select class="custom-select" name="doutorado">
+                    <option>Escolha a gradução</option>
+                    <option value="mer" >Mestre</option>
+                    <option value="dr" >Doutor</option>
+                </select>
                 <br>
                 <input class="form-check-input" type="checkbox" value="" name="orientadora">
 
@@ -281,10 +283,12 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4"  align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="Dr. " id="defaultCheck1" name="doutorado1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Doutor
-                </label><br>
+                <select class="custom-select" name="doutorado1">
+                    <option>Escolha a gradução</option>
+                    <option value="mer" >Mestre</option>
+                    <option value="dr" >Doutor</option>
+                </select>
+                <br>
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="coorientadora1">
 
                 <label class="form-check-label" for="defaultCheck1">
@@ -311,10 +315,12 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <input class="form-check-input" type="checkbox" value="Dr. " name="doutorado2">
-                <label class="form-check-label" for="defaultCheck1">
-                    Doutor
-                </label><br>
+                <select class="custom-select" name="doutorado2">
+                    <option>Escolha a gradução</option>
+                    <option value="mer" >Mestre</option>
+                    <option value="dr" >Doutor</option>
+                </select>
+                <br>
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="coorientadora2">
 
                 <label class="form-check-label" for="defaultCheck1">
@@ -500,9 +506,29 @@ if (!isset($_POST["Enviar"])) {
     $coorientadora1 = isset($_POST["coorientadora1"]) ? 1 : 0;
     $coorientadora2 = isset($_POST["coorientadora2"]) ? 1 : 0;
 
-    $doutorado = !empty($_POST["doutorado"]) ? 1 : 0;//possui doutorado
-    $doutorado1 = !empty($_POST["doutorado1"]) ? 1 : 0;//possui doutorado
-    $doutorado2 = !empty($_POST["doutorado2"]) ? 1 : 0;//possui doutorado
+    if (($_POST["doutorado"]) == "dr"){
+        $doutorado = "dr";
+    }elseif(($_POST["doutorado"]) == "mer"){
+        $doutorado = "mer";
+    }else{
+        $doutorado = null;
+    }
+
+    if (($_POST["doutorado1"]) == "dr"){
+        $doutorado1 = "dr";
+    }elseif(($_POST["doutorado1"]) == "mer"){
+        $doutorado1 = "mer";
+    }else{
+        $doutorado1 = null;
+    }
+
+    if (($_POST["doutorado2"]) == "dr"){
+        $doutorado2 = "dr";
+    }elseif(($_POST["doutorado2"]) == "mer"){
+        $doutorado2 = "mer";
+    }else{
+        $doutorado2 = null;
+    }
 
     $id_aluno = $_SESSION['user'];
 

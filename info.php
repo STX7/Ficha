@@ -1,6 +1,5 @@
 <?php
 /**
-/**
  * 
  * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
  * 
@@ -58,7 +57,7 @@
 	session_start();
 	require("conexao.php");
     $conexao = conectar();
-	$id = $_SESSION['user'];
+	$id = $_SESSION['servidor'];
     $id_usuario = $_GET['id'];
     $lista = $conexao->prepare("select * from usuarios where :id = usuarios.id");
     $lista->bindValue(':id', $id_usuario);

@@ -58,7 +58,7 @@
 	session_start();
 	require("conexao.php");
     $conexao = conectar();
-	$id = $_SESSION['user'];
+	$id = $_SESSION['servidor'];
 
 ?>
 <!DOCTYPE html>
@@ -67,7 +67,8 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title></title>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" rel="stylesheet">
 </head>
 <body style="background-color:#BEC8E3;">		
 
@@ -89,9 +90,6 @@
                 <a class="nav-link" href="Tutorial_fichacat_2011.pdf">Informações</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Alterar dados</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="ficha_servidor.php">Gerar ficha</a>
             </li>
             <li class="nav-item">
@@ -110,18 +108,16 @@
 
   	<?php
 
-	$lista = $conexao->prepare("select * from ficha where ficha.status = 1 or ficha.status = 0");
+	$lista = $conexao->prepare("select * from ficha where ficha.status = 2 or ficha.status = 0");
 	$lista->execute();
 	$itens = $lista->fetchAll(PDO::FETCH_OBJ);
-    echo "<table class='table  table-sm'>
-  <thead >
+    echo "<table class='table align-middle  mb-0 bg-white'>
+  <thead class='bg-light '>
     <tr>
-      <th scope='col'> </th>
-      <th scope='col'>Obra</th>
-      <th scope='col'>Editar</th>
-      <th scope='col'>Excluir</th>
-      <th scope='col'>Enviar</th>
-      <th scope='col'>Info</th>
+      <th>Obra</th>
+      <th>Curso</th>
+      <th>Status</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>";
@@ -132,57 +128,98 @@
         $contador = 0;
     foreach ($itens as $item) {
         $contador = $contador +1;
+        if ($item->curso == "em Bacharelado em Engenharia Cívil") {
+        $curso = "ENG";
+        }
+        if ($item->curso == "em Licenciatura em Química") {
+        $curso = "QUI";
+        }
+        if ($item->curso == "em Ánalise e Desenvolvimento de sistemas")
+        {
+        $curso = "ADS";
+        }
         if ($item->status == 0) {
-          echo "<tr>
-      <th scope='row'>$contador</th>
-      <td><h6>$item->n_autor1</h6>$item->titulo</td>
+        
+          echo "
+          <tr>
       <td>
-      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
+        <div class='d-flex align-items-center'>
+        $contador
+          <div class='ms-3'>
+            <p class='fw-bold mb-1'>$item->n_autor1</p>
+            <p class='text-muted mb-0'>$item->titulo</p>
+          </div>
+        </div>
       </td>
       <td>
-      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
+        <p class='fw-normal mb-1'>$curso</p>
+        
       </td>
       <td>
-      <a href='mail.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='25' width='25'></a>
+        <span class='badge text-bg-danger rounded-pill d-inline'>Aguardando</span>
       </td>
-      <td>
-      <a href='info.php?id=$item->id_usuario'><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
+      
+      <td align='right'>
+        <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+        <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
+        <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
+        <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
       </td>
     </tr>";  
         }
         if ($item->status == 1) {
-           echo "<tr class='table-warning'>
-      <th scope='row'>$contador</th>
-      <td><h6>$item->n_autor1</h6>$item->titulo</td>
+           echo "<tr>
       <td>
-      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
+        <div class='d-flex align-items-center'>
+        $contador
+          <div class='ms-3'>
+            <p class='fw-bold mb-1'>$item->n_autor1</p>
+            <p class='text-muted mb-0'>$item->titulo</p>
+          </div>
+        </div>
       </td>
       <td>
-      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
+        <p class='fw-normal mb-1'>$curso</p>
+        
       </td>
       <td>
-      <a href='mail.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='25' width='25'></a>
+        <span class='badge text-bg-success rounded-pill d-inline'
+              >verificado</span
+          >
       </td>
-      <td>
-      <a href='info.php?id=$item->id_usuario'><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
+      
+      <td align='right'>
+        <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+        <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
+        <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
+        <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
       </td>
     </tr>"; 
         }
         if ($item->status == 2) {
-           echo "<tr class='table-info'>
-      <th scope='row'>$contador</th>
-      <td><h6>$item->n_autor1</h6>$item->titulo</td>
+           echo "<tr>
       <td>
-      <a href='alterar_servidor.php?id=$item->id'><img alt='Editar'  src='.\\img\\edit.svg' height='25' width='25'></a>
+        <div class='d-flex align-items-center'>
+        $contador
+          <div class='ms-3'>
+            <p class='fw-bold mb-1'>$item->n_autor1</p>
+            <p class='text-muted mb-0'>$item->titulo</p>
+          </div>
+        </div>
       </td>
       <td>
-      <a href='excluir_servidor.php?id=$item->id'><img alt='Excluir'  src='.\\img\\x-lg.svg' height='25' width='25'></a>
+        <p class='fw-normal mb-1'>$curso</p>
+        
       </td>
       <td>
-      <a href='mail.php?id=$item->id'><img alt='enviar'  src='.\\img\\send.svg' height='25' width='25'></a>
+        <span class='badge text-bg-warning rounded-pill d-inline'>correção</span>
       </td>
-      <td>
-      <a href='info.php?id=$item->id_usuario'><img alt='enviar'  src='.\\img\\info.svg' height='25' width='25'></a>
+      
+      <td align='right'>
+        <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+        <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
+        <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
+        <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
       </td>
     </tr>"; 
         }    

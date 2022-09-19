@@ -525,6 +525,30 @@ if (!isset($_POST["Enviar"])) {
     }
     $coorientadora2 = isset($_POST["coorientadora2"]) ? "Coorientadora" : "Coorientador";
 
+    if (($_POST["doutorado"]) == "dr"){
+        $doutorado = "dr";
+    }elseif(($_POST["doutorado"]) == "mer"){
+        $doutorado = "mer";
+    }else{
+        $doutorado = null;
+    }
+    
+    if (($_POST["doutorado1"]) == "dr"){
+        $doutorado1 = "dr";
+    }elseif(($_POST["doutorado1"]) == "mer"){
+        $doutorado1 = "mer";
+    }else{
+        $doutorado1 = null;
+    }
+
+    if (($_POST["doutorado2"]) == "dr"){
+        $doutorado2 = "dr";
+    }elseif(($_POST["doutorado2"]) == "mer"){
+        $doutorado2 = "mer";
+    }else{
+        $doutorado2 = null;
+    }
+
     $ano = filter_input(INPUT_POST, 'ano', FILTER_SANITIZE_NUMBER_INT);
     $pags = filter_input(INPUT_POST, 'pags', FILTER_SANITIZE_NUMBER_INT);
     $pags_roma = filter_input(INPUT_POST, 'pags_roma', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -569,18 +593,25 @@ if (!isset($_POST["Enviar"])) {
         $texto .= (". - Uruaçu, " . $ano . ".\n   $pags p.\n\n   ");  
     
 
-    if (empty($_POST["doutorado"]))//caso orientador tenha doutorado
-        $texto .= ("  $orientadora: Prof. ". $nome_ori . " " . $sobrenome_ori . "\n" );
-    else
+    if (($_POST["doutorado"])=="dr"){//caso orientador tenha doutorado
         $texto .= ("  $orientadora: Prof. Dr. ". $nome_ori . " " . $sobrenome_ori . "\n" );
-
+        
+    }elseif(($_POST["doutorado"])=="mer"){
+        $texto .= ("  $orientadora: Prof. Mer. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+    }
+    else{
+        $texto .= ("  $orientadora: Prof. ". $nome_ori . " " . $sobrenome_ori . "\n" );
+    }
 
     if (!empty($nome_coori1)){ //caso tenha coorientador 1
         if (!empty($nome_coori2)) { //caso tenha coorientador 2
 
-            if (!empty($doutorado2)) { // caso coorientador 2 tenha doutorado
+            if (($doutorado2)=="dr") { // caso coorientador 2 tenha doutorado
                 $texto .= "     $coorientadora2: Prof. Dr. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n\n"; 
-            }else{
+            }elseif(($doutorado2)=="mer"){
+                $texto .= "     $coorientadora2: Prof. Mer. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n\n";
+            }
+            else{
                 $texto .= "     $coorientadora2: Prof. " . $nome_coori2 . " " . $sobrenome_coori2 . "\n\n";
             }
             
@@ -588,7 +619,10 @@ if (!isset($_POST["Enviar"])) {
         }
         if (!empty($doutorado1)) {//caso coorientador 1 tenha doutorado
                 $texto .= "     $coorientadora1: Prof. Dr. " . $nome_coori1 . " " . $sobrenome_coori1 . "\n\n"; 
-            }else{
+            }elseif(($doutorado1)=="mer"){
+                $texto .= "     $coorientadora1: Prof. Mer. " . $nome_coori1 . " " . $sobrenome_coori1 . "\n\n";
+            }
+            else{
                 $texto .= "     $coorientadora1: Prof" . $nome_coori1 . " " . $sobrenome_coori1 . "\n\n";
             }
 

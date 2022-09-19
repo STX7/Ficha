@@ -1,6 +1,5 @@
 <?php
 /**
-/**
  * 
  * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
  * 
@@ -65,7 +64,7 @@ function busca($data)
 {
     if(strpos($data[0]["distinguishedname"][0], "URU-CB")){
         $nome = $data[0]["displayname"][0];
-        $email = $data[0]["mail"][0];
+        $email = isset($data[0]["mail"][0])?$data[0]["mail"][0]:$data[0]["extensionattribute4"][0];
         $matricula = $data[0]["cn"][0];
         $tipo = "servidor";
         
@@ -90,7 +89,7 @@ function busca($data)
       $id = $conexao->lastInsertId();
        
   } catch (Exception $e) {
-    //header("Location: index.php?erro=banco");
+    die($e->getMessage());
   }
   return [
     "tipo"=> $tipo,
@@ -125,7 +124,7 @@ try {
     "id" => $id
   ];
 } catch (Exception $e) {
-    die($e);
+  echo " $e";
 }
 
 }

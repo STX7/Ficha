@@ -1,5 +1,4 @@
     <?php
-    /**
 /**
  * 
  * Copyright © 2017 Seção Técnica de Informática - STI / ICMC <sti@icmc.usp.br>
