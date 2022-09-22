@@ -1,4 +1,7 @@
-<?php  $ldapserver = "dc01.ifg.edu.br";
+<?php
+
+
+$ldapserver = "dc01.ifg.edu.br";
 $dominio = "@ifg.br";
 $ldaprdn = "20201050100033".$dominio;
 //$ldap_porta = "389"; caso necessario
@@ -10,24 +13,18 @@ $filter = '(objectClass=*)';
 
 if ($ldapconn) {
     $ldappass = 'SSS#20171050080274';
-
     $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
     
     if ($ldapbind) {
-       $Result = ldap_search($ldapconn, "OU=IFG,DC=ifg,DC=br", "(sAMAccountName=3068240)");
-        $data = ldap_get_entries($ldapconn, $Result);
-
-
-
+       $Result = ldap_search($ldapconn, "OU=IFG,DC=ifg,DC=br", "(sAMAccountName=20201050080130)");
+       $data = ldap_get_entries($ldapconn, $Result);
        $v = implode(",", $data[0]['memberof']);
-
-
-       if(strpos($v, "ALUNOS")){
-         echo "ALUNO";
+       if(strpos($v, "G_URU-BIBLIOTECA")){
+         echo "BIBLIOTECA";
        }else{
-         echo "SERVIDOR";
-            } 
-
+        echo "USUARIO";
+       }
+       
 
     } else {
         echo "LDAP bind failed...";
@@ -36,4 +33,5 @@ if ($ldapconn) {
 
 var_dump($data);
 
-ldap_close($ldapconn);  ?>
+ldap_close($ldapconn);    
+?>

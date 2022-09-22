@@ -103,7 +103,7 @@ if (!isset($_POST["Enviar"])) {
                 <a class="nav-link" href="#">Informações</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Alterar dados</a>
+                <a class="nav-link" href="https://suap.ifg.edu.br/">Suap</a>
             </li>                
             <li class="nav-item">
                 <a class="nav-link" href="ficha_usuario.php">Enviar nova ficha</a>

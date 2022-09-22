@@ -65,6 +65,10 @@ require 'conexao.php';
 $conexao = conectar();
 
 session_start();
+//verificar se o usuário tem permissão pra acessar a página
+if (empty($_SESSION['servidor'])) {
+  header("location:index.php");
+} 
 date_default_timezone_set('America/Sao_Paulo');
 $id = $_GET['id'];
 $mail = new PHPMailer();
@@ -74,7 +78,7 @@ $lista->bindValue(':id', $id);
 $lista->execute();
 $itens = $lista->fetch(PDO::FETCH_OBJ);
 
-$lista2 = $conexao->prepare("select * from aluno where aluno.id = :id");
+$lista2 = $conexao->prepare("select * from usuarios where usuarios.id = :id");
 $lista2->bindValue(':id',$itens->id_usuario);
 $lista2->execute();
 $usuario = $lista2->fetch(PDO::FETCH_OBJ);

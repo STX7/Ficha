@@ -77,7 +77,7 @@
         <!-- Menu  --------------------------------- -->
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <a class="navbar-brand" href="#">Menu</a>
+              <a class="navbar-brand" href="menu.php">Menu</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -88,7 +88,7 @@
                     <a class="nav-link" href="#">Informações</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Alterar dados</a>
+                    <a class="nav-link" href="https://suap.ifg.edu.br/">Suap</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="ficha_usuario.php">Enviar nova ficha</a>

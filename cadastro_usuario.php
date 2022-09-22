@@ -80,7 +80,6 @@ function busca($data)
       $conexao = conectar();
       $cadastro = $conexao->prepare("insert into usuarios (nome, email, matricula) values (:nome, :a, :b)");
 
-      
       $cadastro->bindValue(":nome", $nome);
       $cadastro->bindValue(":a", $email);
       $cadastro->bindValue(":b", $matricula);
