@@ -254,7 +254,7 @@ if (!isset($_POST["Enviar"])) {
                     </div>
                     <div class="form-group col-md-4" align="left" style="left: 20px;">
                         <br>
-                        <select class="custom-select" name="doutorado">
+                        <select class="custom-select form-group col-md-4" name="doutorado">
                             <option>Escolha a gradução</option>
                             <option value="mer">Mestre</option>
                             <option value="dr">Doutor</option>
@@ -287,7 +287,7 @@ if (!isset($_POST["Enviar"])) {
                     </div>
                     <div class="form-group col-md-4" align="left" style="left: 20px;">
                         <br>
-                        <select class="custom-select" name="doutorado1">
+                        <select class="custom-select form-group col-md-4" name="doutorado1">
                             <option>Escolha a gradução</option>
                             <option value="mer">Mestre</option>
                             <option value="dr">Doutor</option>
@@ -319,7 +319,7 @@ if (!isset($_POST["Enviar"])) {
                     </div>
                     <div class="form-group col-md-4" align="left" style="left: 20px;">
                         <br>
-                        <select class="custom-select" name="doutorado2">
+                        <select class="custom-select form-group col-md-4" name="doutorado2">
                             <option>Escolha a gradução</option>
                             <option value="mer">Mestre</option>
                             <option value="dr">Doutor</option>

@@ -255,7 +255,7 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <select class="custom-select" name="doutorado">
+                <select class="custom-select form-group col-md-4" name="doutorado">
                     <option>Escolha a gradução</option>
                     <option value="Mestrado" <?php echo $itens->d_orientador == "mer" ?  "selected" : "" ?>>Mestre</option>
                     <option value="Doutorado" <?php echo $itens->d_orientador == "dr" ?  "selected" : "" ?>>Doutor</option>
@@ -293,7 +293,7 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4"  align="left" style="left: 20px;">
                 <br>
-                <select class="custom-select" name="doutorado1">
+                <select class="custom-select form-group col-md-4" name="doutorado1">
                     <option>Escolha a gradução</option>
                     <option value="Mestrado" <?php echo $itens->d_coorientador1 == "mer" ?  "selected" : "" ?>>Mestre</option>
                     <option value="Doutorado" <?php echo $itens->d_coorientador1 == "dr" ?  "selected" : "" ?>>Doutor</option>
@@ -330,7 +330,7 @@ if (!isset($_POST["Enviar"])) {
             </div>
             <div class="form-group col-md-4" align="left" style="left: 20px;">
                 <br>
-                <select class="custom-select" name="doutorado2">
+                <select class="custom-select form-group col-md-4" name="doutorado2">
                     <option>Escolha a gradução</option>
                     <option value="Mestrado" <?php echo $itens->d_coorientador2 == "mer" ?  "selected" : "" ?>>Mestre</option>
                     <option value="Doutorado" <?php echo $itens->d_coorientador2 == "dr" ?  "selected" : "" ?>>Doutor</option>

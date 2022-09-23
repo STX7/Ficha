@@ -266,7 +266,7 @@ if (!isset($_POST["Enviar"])) {
                     </div>
                     <div class="form-group col-md-4" align="left" style="left: 20px;">
                         <br>
-                        <select class="custom-select" name="doutorado">
+                        <select class="custom-select form-group col-md-4" name="doutorado">
                             <option>Escolha a gradução</option>
                             <option value="Mestrado" <?php echo $itens->d_orientador == "mer" ?  "selected" : "" ?>>Mestre</option>
                             <option value="Doutorado" <?php echo $itens->d_orientador == "dr" ?  "selected" : "" ?>>Doutor</option>
@@ -305,7 +305,7 @@ if (!isset($_POST["Enviar"])) {
                     </div>
                     <div class="form-group col-md-4" align="left" style="left: 20px;">
                         <br>
-                        <select class="custom-select" name="doutorado1">
+                        <select class="custom-select form-group col-md-4" name="doutorado1">
                             <option>Escolha a gradução</option>
                             <option value="Mestrado" <?php echo $itens->d_coorientador1 == "mer" ?  "selected" : "" ?>>Mestre</option>
                             <option value="Doutorado" <?php echo $itens->d_coorientador1 == "dr" ?  "selected" : "" ?>>Doutor</option>
@@ -342,7 +342,7 @@ if (!isset($_POST["Enviar"])) {
                     </div>
                     <div class="form-group col-md-4" align="left" style="left: 20px;">
                         <br>
-                        <select class="custom-select" name="doutorado2">
+                        <select class="custom-select form-group col-md-4" name="doutorado2">
                             <option>Escolha a gradução</option>
                             <option value="Mestrado" <?php echo $itens->d_coorientador2 == "mer" ?  "selected" : "" ?>>Mestre</option>
                             <option value="Doutorado" <?php echo $itens->d_coorientador2 == "dr" ?  "selected" : "" ?>>Doutor</option>
@@ -565,15 +565,21 @@ if (!isset($_POST["Enviar"])) {
 
                 </div>
                 <br>
-                <select class="custom-select" name="status">
+                <div class="row">
+                    
+                <select class="custom-select form-group col-md-4" name="status">
                     <option selected>Status</option>
                     <option value="1" <?php echo $itens->status == "1" ?  "selected" : "" ?>>Aprovado</option>
                     <option value="2" <?php echo $itens->status == "2" ?  "selected" : "" ?>>Correção</option>
-                </select>
-                <input class="btn btn-success btn-lg" type="submit" name="Enviar" value="Enviar" placeholder="Enviar">
-                <input class="btn btn-secondary btn-lg" type="reset" value="Resetar" placeholder="Resetar">
+                </select><br><br>
+                <div class="col-md-4"><input class="btn btn-success btn-lg" type="submit" name="Enviar" value="Enviar" placeholder="Enviar">
+                <input class="btn btn-secondary btn-lg" type="reset" value="Resetar" placeholder="Resetar"></div>
+                
 
                 <br><br>
+
+                </div>
+                
             </form>
         </div>
 

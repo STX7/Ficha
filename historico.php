@@ -167,7 +167,7 @@ if (empty($_SESSION['servidor'])) {
           </td>
           
           <td align='right'>
-            <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+            <a href='info.php?id=$item->id_usuario&idficha=$item->id'><img width='25' height='25' src='.\\img\\search.svg'></a>
             <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
             <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
             <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
@@ -196,7 +196,7 @@ if (empty($_SESSION['servidor'])) {
           </td>
           
           <td align='right'>
-            <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+            <a href='info.php?id=$item->id_usuario&idficha=$item->id'><img width='25' height='25' src='.\\img\\search.svg'></a>
             <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
             <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
             <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
@@ -223,7 +223,7 @@ if (empty($_SESSION['servidor'])) {
           </td>
           
           <td align='right'>
-            <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+            <a href='info.php?id=$item->id_usuario&idficha=$item->id'><img width='25' height='25' src='.\\img\\search.svg'></a>
             <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
             <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
             <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>

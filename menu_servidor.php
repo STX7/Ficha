@@ -61,6 +61,20 @@ session_start();
 if (empty($_SESSION['servidor'])) {
   header("location:index.php");
 }
+
+if(!empty($_GET['msg'])){
+  if(($_GET['msg']) == 'sucesso'){
+      echo "<script>alert('e-mail enviado com sucesso');
+      window.location.href = 'menu_servidor.php';</script>";
+  }elseif (($_GET['msg']) == 'erro') {
+    echo "<script>alert('Falha ao enviar');
+      window.location.href = 'menu_servidor.php'; </script>";
+  }else{
+      echo "<script>alert('falha ao enviar e-mail');
+      window.location.href = 'menu_servidor.php'; </script>";
+  }
+
+}
 require("conexao.php");
 $conexao = conectar();
 $id = $_SESSION['servidor'];
@@ -168,7 +182,7 @@ $id = $_SESSION['servidor'];
       </td>
       
       <td align='right'>
-        <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+        <a href='info.php?id=$item->id_usuario&idficha=$item->id'><img width='25' height='25' src='.\\img\\search.svg'></a>
         <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
         <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
         <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
@@ -197,7 +211,7 @@ $id = $_SESSION['servidor'];
       </td>
       
       <td align='right'>
-        <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+        <a href='info.php?id=$item->id_usuario&idficha=$item->id'><img width='25' height='25' src='.\\img\\search.svg'></a>
         <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
         <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
         <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
@@ -224,7 +238,7 @@ $id = $_SESSION['servidor'];
       </td>
       
       <td align='right'>
-        <a href='info.php?id=$item->id_usuario'><img width='25' height='25' src='.\\img\\search.svg'></a>
+        <a href='info.php?id=$item->id_usuario&idficha=$item->id'><img width='25' height='25' src='.\\img\\search.svg'></a>
         <a href='alterar_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\edit.svg'></a>
         <a href='excluir_servidor.php?id=$item->id'><img width='25' height='25' src='.\\img\\x.svg'></a>
         <a href='mail.php?id=$item->id'><img width='25' height='25' src='.\\img\\send.svg'></a></div>
